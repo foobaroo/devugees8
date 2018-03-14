@@ -1,0 +1,60 @@
+ls -la = ll
+ls -a = la
+su jan = set user to jan
+
+task 1
+~~~~~~
+
+make 7 backup copies of halloworld1 and name them
+
+halloworld2
+halloworld3
+.
+.
+.
+halloworld8
+
+task 2
+~~~~~~
+
+1) Open your terminal with a shortcut
+2) Go to your Desktop folder
+3) Create a new folder "beaches"
+4) Go to https://www.google.com/advanced_image_search
+5) Download six "beach" images from the web, 2 jpgs, 2 gifs and 2 pngs.
+   and save them in your beaches folder.
+6) Rename the two jpgs to image1.jpg and image2.jpg and do the same with the
+   gifs and the pngs.
+7) Create three folders png, gif and jpg and move the files the proper folders.
+8) Make a backup copy of your beaches folder and name it beaches_bak
+9) Delete your original beaches folder.
+
+
+task 3
+~~~~~~
+
+1) Open a terminal and go to your Desktop folder.
+2) Create a folder 'lorem' and step into it.
+3) Create three files a.txt, b.txt and c.txt
+4) Go to https://www.lipsum.com
+5) Open three terminal tabs and in each, open nano.
+5a) Copy+paste the first passage of lipsum.com into a.txt
+5b) Copy+paste the second and third passage into b.txt and c.txt respectively
+5c) Save your files and close all nanos.
+6) Find the file that has the word "dummy" as content
+7) Open that file in nano. 
+8) Open another terminal tab.
+9) Identify the nano process and kill it from the tab of 9)
+10) Archive the other two files in one archive named "lorem.tar"
+11) In the lorem-folder, create a symbolic link named "homelink" that points
+    to your home folder.
+12) Move lorem.tar into the homelink folder.
+
+
+
+
+
+
+
+
+

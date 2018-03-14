@@ -1,0 +1,219 @@
+-- open terminal
+-- close terminal
+
+-- open terminal using CTRL+ALT+T
+-- close terminal using CTRL+D
+
+-- open terminal using CTRL+ALT+T
+-- open 5 new instances with CTRL+SHIFT+N
+-- close 5 new instances with CTRL+D
+
+$ pwd 
+
+$ cd ~
+$ cd Desktop
+-- use D[TAB]
+
+$ touch halloworld
+$ echo "hallo, how are you?" > halloworld.txt
+
+$ cat halloworld
+
+$ mkdir hallofolder
+
+$ mv halloworld halloworld_folder/
+
+$ cd halloworld_folder/
+
+$ mv halloworld halloworld1
+
+$ cp halloworld1 halloworld2
+
+$ cp halloworld1 halloworld3
+
+$ cp halloworld1 halloworld4
+
+$ cp halloworld1 halloworld5
+
+$ cp halloworld1 halloworld6
+
+$ cp halloworld1 halloworld7
+
+$ cp halloworld1 halloworld8
+
+$ cat *
+
+-- show shortcut CTRL + L
+
+$ mkdir hallo_even hallo_odd
+
+$ mv halloworld1 halloworld3 halloworld5 halloworld7 hallo_odd/
+
+$ mv halloworld2 halloworld4 halloworld6 halloworld8 hallo_even/
+
+$ touch aaaa baaa caaa aaab aaac abac abbc 
+
+$ mkdir folder1 folder2 folder3
+
+$ mv *aa folder1
+
+$ mv *c folder2
+
+$ mv aaab folder3
+
+$ sudo apt-get install tree
+
+$ tree .
+
+--
+-- task: 
+--       a) Open terminal using CTRL+ALT+T
+--			Open 5 new instances with CTRL+SHIFT+N
+--			Close 5 new instances with CTRL+D
+--       1) Go to your Desktop folder
+--       2) Create a new folder "beaches"
+--       3) Go to https://www.google.com/advanced_image_search
+--   
+--       4) download five "beach" images from the web, 2 jpegs, 2 gifs and 2 pngs
+--          and save them in the beaches/ folder. Maximum file size is 500 kb per file!
+-- 
+-- 		 5) Rename the two jpgs to image1.jpg and image2.jpg and do the same
+--          with the gifs and pngs.
+--		    
+--       6) Create three folders png, gif and jpg and move the downloaded files into
+--		    the proper folders!		
+-- 
+--       7) Make a backup copy of your beaches folder and name it beaches_bak
+--       8) Delete your original beaches folder
+
+
+$ cd ~
+
+$ find . -name 'hallofolder'
+
+$ cd hallofolder
+
+$ find . -name '*jpg'
+
+$ find . -name '*jpg'
+
+$ find . -type d
+
+$ find . -type f
+
+$ grep -Ril "hallo"
+
+$ ps ax 
+
+$ glxgears
+
+-- new tab
+
+$ glxgears
+
+-- piping line by line to another program, in this case "grep"
+
+$ ps ax | grep glxgears
+
+-- we see two processes running
+
+$ kill PID
+
+$ glxgears
+
+$ killall glxgears
+
+-- 
+-- disconnect from the network
+-- 
+
+$ tail -f /var/log/syslog
+
+--
+-- reconnect to the network
+--
+
+$ cd hallofolder/
+
+$ touch file1 file2 file3 
+
+$ tar cfv archive.tar file1 file2 file3
+
+$ mkdir extractedfiles
+
+$ mv archive.tar extractedfiles/
+
+$ cd extractedfiles
+
+$ tar xfv archive.tar
+
+$ cd ..
+
+$ nano index.html
+
+-- put some basic site in there
+-- save it
+-- let them open it
+-- put some halloworld in the title
+
+$ alias b="cd .."
+
+$ nano ~/.bashrc
+
+-- add the b alias to the .bashrc
+-- restart the console
+
+$ cd ~/Desktop/hallofolder
+
+$ ln -s ../ ./desktop
+
+$ cd desktop
+
+--
+-- task: 
+--       1) Open terminal and go to your Desktop folder
+--       2) Create a folder 'lorem' and step into it.
+--       3) Create three files a.txt, b.txt and c.txt
+--       4) Go to https://www.lipsum.com/ and copy+paste.
+--       5) Open three terminal tabs and in each, open nano.
+--       5a) Copy+paste the first passage into a.txt
+--       5b) Copy+paste the second and third passage into b.txt and c.txt respectively.
+--       6) Find the files that have the word "dummy".
+--       7) Open that file using nano.
+--       8) Open another terminal tab.
+--       9) Identify the process ID of nano and kill it.
+--       10) Archive the other two files in one archive named "lorem.tar"
+--       11) Create a symbolic link named "homelink" which points to your homefolder.
+--       12) Move lorem.tar into "homelink"
+
+--
+--
+--
+
+
+drwxrwxr-x  5 jan jan 4,0K Mär 13 23:39 .
+drwxr-xr-x 45 jan jan 4,0K Mär 13 21:43 ..
+-rw-rw-r--  1 jan jan  53K Mär 13 21:54 474275314.jpg
+lrwxrwxrwx  1 jan jan    3 Mär 13 23:39 desktop -> ../
+drwxrwxr-x  2 jan jan 4,0K Mär 13 23:13 extraction
+-rw-rw-r--  1 jan jan    0 Mär 13 23:13 file1
+-rw-rw-r--  1 jan jan    0 Mär 13 23:13 file2
+-rw-rw-r--  1 jan jan    0 Mär 13 23:13 file3
+drwxrwxr-x  3 jan jan 4,0K Mär 13 21:57 hallo_even
+drwxrwxr-x  2 jan jan 4,0K Mär 13 21:48 hallo_odd
+-rwxrwxr-x  1 jan jan   32 Mär 13 23:29 task.sh
+
+
+-rw-rw-r--  1 jan jan  53K Mär 13 21:54 474275314.jpg
+
+1: - file, d folder, l symbolic link
+
+the rest: rwx
+
+
+
+-- what is the big benefit of having everything in the console?
+-- we can put our commands in a file that will be processed line by line
+-- like a program
+
+
