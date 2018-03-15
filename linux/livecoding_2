@@ -51,6 +51,33 @@ task 3
 12) Move lorem.tar into the homelink folder.
 
 
+task 4
+~~~~~~
+
+1) Create a folder on your Desktop 'code'
+2) Create two subfolders 'javascript' and 'html'
+3) In javascript, create two files main.js and login.js
+4) In html, create index.html
+5) Add <h1>Hallo World</h1> to index.html
+6) Open 5) with Chrome
+7) Change the rights of index.html that others can only read.
+8) Add a new Ubuntu user 'designer'
+9) Log in as 'designer'
+10) From designer's home folder, create a symbolic link to your html subfolder.
+11) Change to the html subfolder using your symlink
+12) Try to change index.html to <h1 style="color: blue">Hallo World</h1>
+13) Create a group webproject and add your user and designer to it.
+14) Make the index.html writeable to all members of the group webproject.
+15) Repeat 12)
+
+
+
+
+
+
+
+
+
 
 
 

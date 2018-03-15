@@ -217,3 +217,145 @@ the rest: rwx
 -- like a program
 
 
+-- 
+-- create a new file print out some "hallo world"
+-- 
+-- hallo.sh
+-- echo "hallo world"
+  
+$ chmod u+x hallo.sh
+   
+$ ./task.sh
+
+$ chmod u-x hallo.sh
+
+$ ./task.sh
+
+$ chmod u-r hallo.sh
+
+$ cat hallo.sh
+
+$ chmod u+r hallo.sh
+
+-- 
+-- lets lock the file down
+-- 
+
+$ chmod o-r hallo.sh
+
+$ chmod o-x hallo.sh
+
+$ chmod o-w hallo.sh
+
+--
+--
+--
+
+$ sudo adduser hans
+
+--
+-- ideally, an entirely new user will be created and has a password
+-- and his own login
+--
+
+$ sudo su hans
+
+-- 
+-- new home folder was created in /home
+--
+
+$ cd ~
+
+-- 
+-- login as hans and show the files
+-- 
+
+$ cd /home/jan/Desktop/halloworld_folder
+
+--
+-- trying to execute task.sh
+
+$ ./task.sh
+
+-- permission denied
+
+$ cat task.sh
+
+$ nano task.sh
+
+-- now hans (me) belongs to the "others"
+-- show PPT group
+
+-- go to jan terminal
+
+$ sudo groupadd -g 10000 developer
+$ sudo usermod -a -G developer hans
+$ sudo usermod -a -G developer jan
+
+--
+-- logout jan and hans
+--
+
+$ groups
+
+-- 
+-- hans is only part of his own group, like any other 
+-- 
+
+-- as hans
+$ cd ~/halloworld_folder
+$ ./task.sh
+
+
+-- task
+-- 
+-- 1) Create a folder 'code'
+-- 2) Create two subfolders 'javascript' and 'html'
+-- 3) In javascript, create two files main.js and login.js
+-- 4) In html, create index.html
+-- 5) Add <h1>Hallo World</h1> to index.html
+-- 6) Open 5) with Google Chrome
+-- 7) Change the rights to index.html that others can only read index.html
+-- 8) Add an Ubuntu user 'designer'
+-- 9) Log in as 'designer'
+-- 10) From visitor's home folder, create a symbolic link to your html subfolder.
+-- 11) Change to the html subfolder using your symlink
+-- 12) Try to edit index.html to <h1 style="font-color: blue">Hallo World</h1>
+-- 13) Create a group webproject and add your user and designer.
+-- 14) Make the index.html writable to all members of the group webproject.
+-- 15) Repeat 12
+
+-- package management
+
+
+$ sudo apt-get update
+
+$ sudo apt-get upgrade
+
+$ apt-get autoremove
+
+$ apt-cache search screensaver
+
+$ apt-cache search screensaver | less 
+
+$ sudo apt-get install wmmatrix
+
+$ sudo apt-get remove wmmatrix
+
+$ sudo apt-get -f remove
+
+-- 
+-- Do yourself create a folder on your server, then let everyone connect to it and create
+-- a file with his_name.txt
+-- 
+
+
+--
+-- diff
+--  
+
+-- write a text about yourself like this
+
+diff -rupP intro1.txt intro2.txt > patch.txt
+
+
