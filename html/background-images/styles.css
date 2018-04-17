@@ -1,0 +1,28 @@
+.background-example {
+    height: 200px;
+    width: 200px;
+    border: solid 1px black;
+}
+
+#background-1 {
+    /* by default, background images repeat x and x 
+       are positioned top left */
+
+
+    background-image: url('images/blue_background.jpg');
+}
+
+#background-2 {
+    background-color: #a3d;
+}
+
+#background-3 {
+    background-image: url('images/steak_background.jpg');
+    background-repeat: no-repeat;
+    background-position: center center; /* x y */
+}
+
+#background-4 {
+    background: url('images/skull_background.jpg') bottom left repeat-x;
+}
+
