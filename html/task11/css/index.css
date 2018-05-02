@@ -1,0 +1,170 @@
+/* Global Styles */
+
+.container {
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #e0e0e0;
+  display: block;
+  margin: 40px 0;
+}
+
+hr.last {
+  margin: 100px 0 25px 0;
+}
+
+.textalign-right {
+  text-align: right;
+}
+
+/* Layout */
+
+#header .container,
+#footer .container {
+  padding: 5px 15px;
+}
+
+#header {
+  margin-bottom: 1px;
+}
+
+#nav {
+  display: inline-block;
+}
+
+#nav .nav-container {
+  display: inline-block;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+#nav .nav-item {
+  display: inline-block;
+}
+
+#nav .nav-item a {
+  color: #ffffff;
+  display: block;
+  padding: 4px;
+  text-decoration: none;
+}
+
+#nav .nav-item-current a {
+  color: #aaa;
+  font-weight: bold;
+}
+
+#quicksearch {
+  float: right;
+  padding: 5px 0;
+}
+
+#quicksearch input[type="text"] {
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background: #ffffff;
+  font-size: 14px;
+  line-height: 14px;
+  margin-right: 3px;
+  padding: 4px 6px;
+  vertical-align: middle;
+  width: 100px;
+}
+
+#quicksearch button {
+  background-color: transparent;
+  border: 1px solid #28a745;
+  color: #28a745;
+  font-size: 14px;
+  padding: 4px 5px;
+}
+
+.container-medium {
+  margin: 0 auto;
+  width: 80%;
+}
+
+/* Contents */
+
+#hero {
+  background: #777777 url("https://picsum.photos/1820/900?image=649") no-repeat
+    top left;
+  background-size: cover;
+  position: relative;
+  height: 472px;
+  width: 100%;
+}
+#hero-text {
+  bottom: 15%;
+  color: #ffffff;
+  left: 5%;
+  position: absolute;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.73);
+  max-width: 60%;
+}
+
+#hero-text h2 {
+  font-size: 40px;
+  margin: 0 0 20px 0;
+  padding: 0;
+}
+
+#hero-text p {
+  font-size: 20px;
+  line-height: 1.5;
+}
+
+#service-list {
+  margin: 40px 0 0 0;
+}
+
+.service-item {
+  margin: 0 0 40px 0;
+  width: 100%;
+  text-align: center;
+}
+
+.service-item h3 {
+  color: #555;
+  font-size: 30px;
+  font-weight: 400;
+  margin: 15px 0;
+}
+
+.service-item p {
+  font-size: 14px;
+}
+
+.service-image {
+  display: inline-block;
+  border-radius: 50%;
+}
+
+.feature .col {
+  float: none;
+}
+
+.feature-image-right {
+  text-align: left;
+}
+
+.feature img {
+  max-width: 100%;
+}
+
+.feature h3 {
+  color: #5a5a5a;
+  font-size: 25px;
+  font-weight: 400;
+  margin: 10px 0 15px 0;
+}
+
+.light-gray {
+  color: #868e96;
+}
