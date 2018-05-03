@@ -14,9 +14,16 @@ hr {
   margin: 40px 0;
 }
 
+@media (min-width: 768px) {
+  hr {
+    margin: 100px 0;
+  }
+}
+
 hr.last {
   margin: 100px 0 25px 0;
 }
+
 
 .textalign-right {
   text-align: right;
@@ -55,6 +62,25 @@ hr.last {
   text-decoration: none;
 }
 
+@media (min-width: 768px) {
+  #nav .nav-item a {
+    padding: 10px;
+  }
+}
+
+@media (min-width: 768px) {
+  #quicksearch input[type="text"] {
+    font-size: 16px;
+    line-height: 16px;
+    margin-right: 5px;
+    padding: 8px 12px;
+  }
+
+  #quicksearch button {
+    padding: 10px 12px;
+  }
+}
+
 #nav .nav-item-current a {
   color: #aaa;
   font-weight: bold;
@@ -84,6 +110,7 @@ hr.last {
   font-size: 14px;
   padding: 4px 5px;
 }
+
 
 .container-medium {
   margin: 0 auto;
@@ -145,6 +172,62 @@ hr.last {
   display: inline-block;
   border-radius: 50%;
 }
+
+@media (min-width: 768px) {
+  #service-list {
+    margin-left: -30px;
+    margin-top: 50px;
+  }
+
+  .service-item {
+    display: block;
+    float: left;
+    margin: 0 0 30px 0;
+    padding-left: 50px;
+    width: 50%;
+  }  
+}
+
+@media (min-width: 992px) {
+  #service-list {
+    margin-left: -50px;
+    margin-top: 70px;
+  }
+
+  .service-item {
+    padding-left: 30px;
+    width: 30%;
+  }
+}
+
+@media (max-width: 768px) {
+  .feature .col {
+    width: 100%;
+  }
+}
+
+@media (min-width: 768px) {  
+  .feature .col {
+    float: left;
+  }
+
+  .feature-reverse .col {
+    float: right;
+  }
+
+  .feature-image-right {
+    text-align: right;
+  }
+
+  .feature h3 {
+    font-size: 30px;
+    font-weight: 400;
+    margin: 0px 0 20px 0;
+  }
+}
+
+
+/*   features    */
 
 .feature .col {
   float: none;
