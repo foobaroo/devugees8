@@ -1,0 +1,72 @@
+* {
+  margin: 0;
+  padding: 0; }
+
+/* variables always start with dollar sign */
+/* comment */
+nav {
+  margin: 30px;
+  background-color: #f9ed63; }
+  nav::after {
+    content: "";
+    clear: both;
+    display: table; }
+
+.navigation {
+  list-style: none;
+  float: left;
+  /* first without sass 
+    .navigation li {
+  
+    }
+    */ }
+  .navigation li {
+    display: inline-block;
+    margin-left: 30px;
+    /* a */ }
+    .navigation li:first-child {
+      margin: 0; }
+    .navigation li a:link {
+      text-decoration: none;
+      text-transform: uppercase;
+      color: #333; }
+
+.buttons {
+  float: right; }
+
+.btn-main:link,
+.btn-hot:link {
+  padding: 10px;
+  display: inline-block;
+  /*  */
+  text-align: center;
+  border-radius: 100px;
+  text-decoration: none;
+  text-transform: uppercase;
+  width: 150px;
+  color: #eee; }
+
+.btn-main:link {
+  background-color: #f08a5d; }
+
+.btn-main:hover {
+  background-color: #ea5717; }
+
+.btn-hot:link {
+  background-color: #b83b5e; }
+
+.btn-hot:hover {
+  background-color: #d16f8a; }
+
+/*
+  nav::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+  */
+/* 
+  li:first-child {
+    margin: 0;
+  }
+  */

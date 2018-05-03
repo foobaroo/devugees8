@@ -1,0 +1,33 @@
+.wrapper {
+    display: grid;
+    /* similar to flex: 1 1 1 */    
+    /* grid-template-columns: 1fr 1fr 1fr; */
+    grid-template-columns: repeat(4, 1fr); /* try (4, 1fr 2fr) */
+    grid-gap: 1em;
+    /* later */
+    grid-auto-rows: 100px;
+    /* when we have more text added in 2nd div */
+    grid-auto-rows: minmax(100px, auto);
+}
+
+/* first without nested div */
+.nested {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 70px;
+    grid-gap: 1em;
+}
+
+.wrapper > div {
+    background: #eee;
+    padding: 1em;
+}
+
+.wrapper > div:nth-child(odd) {
+    background: #ddd;
+}
+
+.nested > div {
+    border: #333 1px solid;
+    padding: 1em;
+}
