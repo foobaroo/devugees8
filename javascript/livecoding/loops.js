@@ -17,6 +17,8 @@ for(var i=0; i<=10; i = i + 1) {
 
 console.log( arrEmpty );
 
+// Task:
+// Create a nested loop that creates this array:
 // [ 
 //   [0],
 //   [0,1],
@@ -35,3 +37,17 @@ x.push(y);
 x.push(z);
 
 console.log(x);
+
+
+// solution:
+
+var a = [];
+for(var i=0;i<10;i++) {
+    var b = [];
+    for(var j=0;j<=i;j++) {
+        b.push(j);
+    }
+    a.push(b);
+}
+
+console.log(a);
