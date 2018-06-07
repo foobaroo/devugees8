@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>User Manager</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="navigation">
+            <a class="navlinks" id="userlink">Users</a> | 
+            <a class="navlinks" id="commentslink">Comments</a> |
+            <a class="navlinks" id="adduserlink">Add User</a> |
+            <a class="navlinks" id="addcommentlink">Add Comment</a>
+        </div>
+        
+        <div id="main"> <!-- either users or comments-->
+            
+            
+            
+        </div>
+        
+        <div id="adduser">
+            <input type="text" id="firstnameinput" placeholder="Firstname here ...">
+            <input type="text" id="usernameinput" placeholder="Username here ...">
+            <input type="text" id="emailinput" placeholder="Email here ...">
+            <button id="adduserbutton">Add User</button>
+        </div>
+        
+        <div id="addcomment">
+            <input type="text" id="commentnameinput" placeholder="Name here">
+            <input type="text" id="commentemailinput" placeholder="Name here">
+            <textarea id="commentbodyinput" cols="30" rows="10"></textarea>
+            <button id="addcommentbutton">Add Comment</button>
+        </div>
+        
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>

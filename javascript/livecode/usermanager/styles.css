@@ -1,0 +1,45 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    background-color: cornflowerblue;
+}
+
+.navigation {
+    padding: 5px;
+}
+
+#main {
+    margin-top: 10px;
+    background-color: cornflowerblue;
+}
+
+.navlinks {
+    color: white;
+    cursor: pointer;
+}
+
+#adduser, #addcomment {
+    display: none;
+}
+
+#adduser, #addcomment {
+    padding: 10px;
+}
+
+#adduser input, button {
+    display: block;
+    margin-top: 5px;
+    font-size: 16px;
+}
+
+#addcomment input, button, textarea {
+    display: block;
+    margin-top: 5px;
+    font-size: 16px;
+}
