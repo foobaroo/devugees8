@@ -1,0 +1,40 @@
+.container {
+    margin: 20px;
+    display: grid; /* reload page afterwards */
+    height: 500px; /* s7 */
+    /* overwrite only having one column by the width */
+    /* s1 grid-template-columns: 200px 150px 20%; 20% of the rounding container */
+    /* s2 grid-template-columns: 200px 150px 20% 1fr; */
+    /* s3 grid-template-columns: 200px 2fr 20% 1fr;  */
+    /* s6 grid-template-columns: 200px 5rem 20% auto;  */
+    /* s8 grid-template-columns: 25% 25% 25% 25%; */
+    grid-template-columns: repeat(4, 25%); /* s9 */
+    /* remaining space = 100% - 20% - 150px - 200px 
+       remaining space is split between columsn with 1fr */
+    /* grid-template-rows: 5rem 2.5rem; s3 */
+    /* grid-template-rows: 5rem auto; s6 */
+    grid-template-rows: 5rem minmax(10px, auto); /* s10 */    
+}
+
+.el1 {    
+    background: rgba(255, 154, 72, 0.5);
+}
+
+.el2 {
+    background: rgba(255, 0, 0, 0.5);
+}
+
+.el3 {
+    background: rgba(0, 128, 0, 0.5);
+    /* grid-column-start: 3; s4 show the line numbers in FF now */
+    grid-column-start: 2; /* s12, so that span 3 takes 3 rows */
+    /* grid-column-end: 5; s4 */
+    /* grid-column-end: span 2; s11 */
+    grid-column-end: span 3; /* s12 here, nothing changes because we only got 4 divs*/
+    grid-row-start: 1; /* s5 same applies for rows */
+    grid-row-end: 3; /* s5 */
+}
+
+.el4 {
+    background: rgba(0, 4, 255, 0.5);
+}

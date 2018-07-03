@@ -1,0 +1,105 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  .menu-container {
+    color: #fff;
+    background-color: #5995DA;  /* Blue */
+    padding: 20px 0;
+    display: flex; /* 1, the browser now knows this is not the default box model */
+    justify-content: center; /* 2 This has the same effect as adding a margin: 0 auto declaration to the .menu element. But, notice how we did this by adding a property to the parent element (the flex container) instead of directly to the element we wanted to center (the flex item). */    
+  }
+  
+  .menu {
+    border: 1px solid #fff;  /* For debugging */
+    width: 900px;
+    display: flex; /* 3 */ 
+    justify-content: space-around; /* 4 */
+  }
+
+  .links {
+      display: flex;
+      justify-content: flex-end;
+  }
+
+  .login {
+      margin-left: 20px;
+  }
+
+  .header-container {
+    color: #5995DA;
+    background-color: #D6E9FE;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .header {
+    width: 900px;
+    height: 300px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .social, .logo, .subscribe {
+    border: 1px solid #5995DA;
+    /* later for vertical alignment */
+    align-self: flex-end;
+  }
+
+  /* what if we add more items than can fit? */
+
+  .photo-grid-container {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .photo-grid {
+    width: 900px;
+    display: flex;
+    justify-content: center;
+    /* justify-content: flex-start; */
+    /* first let them overflow to the right */
+    flex-wrap: wrap;
+    /* try this afterwards */
+    /* flex-direction: column; */
+    flex-direction: row-reverse;
+    /* because justify content gets rotated, too */
+    align-items: center;    
+  }
+  
+  .photo-grid-item {
+    border: 1px solid #fff;
+    width: 300px;
+    height: 300px;
+  }
+
+  .first-item {
+    order: 1
+  }
+
+  .last-item {
+    order: -1;
+  }
+
+  .footer {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .footer-item {
+    border: 1px solid #fff;
+    background-color: #D6E9FE;
+    height: 200px;
+    flex: 1;
+  }
+
+  .footer-one,
+  .footer-three {
+    background-color: #5995DA;
+    flex: initial; /* without this, flex: 1 would be inherited from .footer-item rule */
+    width: 300px;
+    /* flex: 2; */
+  }  
