@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Shop</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">Mini-Shop</div>
+            <div class="navigation">
+                <div class="navi-categories">
+                    <a href="#" onclick="loadProducts()">All</a> | 
+                    <a href="#" onclick="loadProducts()">Books</a> | 
+                    <a href="#" onclick="loadProducts()">Movies</a> | 
+                    <a href="#" onclick="loadProducts()">Music</a>
+                </div>
+                <div class="navi-right"><a href="#" onclick="showCart()">Cart</a></div>
+            </div>
+        </div>
+        <div class="main">
+            <div class="thumbnail-container">
+                <div class="thumbnail">
+                    <div class="thumbnail-name">Goodfellas</div>
+                    <div class="thumbnail-price">19.99 €</div>
+                </div>
+                <div class="thumbnail">
+                    <div class="thumbnail-name">Goodfellas</div>
+                    <div class="thumbnail-price">19.99 €</div>
+                </div>
+                <div class="thumbnail">
+                        <div class="thumbnail-name">Goodfellas</div>
+                        <div class="thumbnail-price">19.99 €</div>
+                </div>
+                <div class="thumbnail">
+                        <div class="thumbnail-name">Goodfellas</div>
+                        <div class="thumbnail-price">19.99 €</div>
+                </div>          
+            </div>
+            <div class="product-details">
+                <div class="product-container">
+                    <div class="product-image">
+                        <img src="images/goodfellas.jpg" alt="" srcset="">
+                    </div>
+                    <div class="product-infos">
+                        <h2>Good Fellas</h2>
+                        <div class="product-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis repellendus perspiciatis rerum ducimus quam optio adipisci dolorem dolore obcaecati dolor odit, corrupti dolorum voluptate necessitatibus iure est aliquam iste dignissimos.</div>
+                        <div class="product-buy">
+                            <div>
+                                <span class="price">19.99 €</span>
+                                <input type="number" class="quantity">
+                                <button class="btnaddcart">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="cart">
+
+            </div>
+        </div>
+    </div>
+    <script src="js/main.js"></script>
+</body>
+</html>
