@@ -24,7 +24,7 @@ app.post('/product', function(req, res) {
         var products = null;
         try { products = JSON.parse(data); }
         catch(e) {
-            return res.send({error: e.toString()});
+            return res.send({ error: e.toString() });
         }
 
         if(!Array.isArray(products)) {
@@ -85,7 +85,6 @@ app.put('/product/:productid', function(req, res) {
         else {
             return res.send({ error: 'product not found' });
         }
-
     });
 });
 
@@ -168,7 +167,7 @@ app.post('/order', function(req, res) {
           return res.send({error: e.toString()});
       }
 
-      if(!Array.isArray(products)) {
+      if(!Array.isArray(req.body.productids)) {
           return res.send({ error: 'orders json is invalid/ not a proper array' });
       }
 
@@ -213,4 +212,5 @@ app.get('/order', function(req, res) {
   });
 });
 
+console.log('started shop server.');
 app.listen( 3000 );
