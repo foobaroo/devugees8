@@ -70,6 +70,7 @@ a {
 
 .product-details {
     background: #4b4b4b;
+    display: none;
 }
 
 .product-container {
@@ -94,3 +95,22 @@ a {
 .product-buy {
     margin-top: 15px;
 }
+
+.quantity {
+    width: 40px;
+    font-size: 16px;
+}
+
+.btnaddcart {
+    margin-left: 10px;
+    margin-top: 20px;
+    font-size: 16px;
+    padding: 4px;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: flex-start;
+}
+
+
