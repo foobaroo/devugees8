@@ -14,9 +14,9 @@
             <div class="navigation">
                 <div class="navi-categories">
                     <a href="#" onclick="loadProducts()">All</a> | 
-                    <a href="#" onclick="loadProducts()">Books</a> | 
-                    <a href="#" onclick="loadProducts()">Movies</a> | 
-                    <a href="#" onclick="loadProducts()">Music</a>
+                    <a href="#" onclick="loadProducts('Books')">Books</a> | 
+                    <a href="#" onclick="loadProducts('Movies')">Movies</a> | 
+                    <a href="#" onclick="loadProducts('Music')">Music</a>
                 </div>
                 <div class="navi-right"><a href="#" onclick="showCart()">Cart</a></div>
             </div>
@@ -24,19 +24,20 @@
         <div class="main">
             <div class="thumbnail-container" id="thumbnailcontainer">
             </div>
-            <div class="product-details">
+            <div id="productdetails" class="product-details">
                 <div class="product-container">
                     <div class="product-image">
-                        <img src="images/goodfellas.jpg" alt="" srcset="">
+                        <img id="productimage" src="images/goodfellas.jpg" alt="" srcset="">
                     </div>
                     <div class="product-infos">
-                        <h2>Good Fellas</h2>
-                        <div class="product-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis repellendus perspiciatis rerum ducimus quam optio adipisci dolorem dolore obcaecati dolor odit, corrupti dolorum voluptate necessitatibus iure est aliquam iste dignissimos.</div>
+                        <h2 id="productname">Good Fellas</h2>
+                        <div id="productdescription" class="product-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis repellendus perspiciatis rerum ducimus quam optio adipisci dolorem dolore obcaecati dolor odit, corrupti dolorum voluptate necessitatibus iure est aliquam iste dignissimos.</div>
                         <div class="product-buy">
                             <div>
-                                <span class="price">19.99 €</span>
-                                <input type="number" min="1" max="9" class="quantity">
-                                <button class="btnaddcart">Add to Cart</button>
+                                <span id="price" class="price">19.99 €</span> X 
+                                <input type="number" min="1" max="9" class="quantity" id="quantity">
+                                = <span class="total-amount" id="totalamount">40,00 €</span>
+                                <button class="btnaddcart" id="btnaddcart">Add to Cart</button>
                             </div>
                         </div>
                     </div>
