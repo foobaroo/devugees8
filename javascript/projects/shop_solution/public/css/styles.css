@@ -41,7 +41,7 @@ a {
     padding: 10px;
     align-items: center;
     background: #4b4b4b;
-    display: none;
+    /* display: none; */
 }
 
 .thumbnail {
@@ -111,6 +111,7 @@ a {
 .cart {
     background: #4b4b4b;
     padding: 10px;
+    display: none;
 }
 
 .cart-item {
@@ -159,4 +160,28 @@ a {
     padding: 4px;
     margin-left: 15px;
     font-size: 26px;
+}
+
+@media only screen and (max-width: 600px) {
+    .container {
+        min-width: auto;
+    }
+
+    .product-container {
+        display: block;
+    }
+
+    .product-image img {
+        width: 240px;
+    }
+
+    .cart-item {
+        display: block;
+    }
+
+    .cart-buy {
+        margin-left: 0px;
+        padding-left: 10px;
+    }
+
 }

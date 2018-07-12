@@ -10,10 +10,6 @@ const app = express();
 app.use('/', express.static(__dirname + '/public'));
 app.use(bodyParser.json());
 
-app.get('/', function(req, res) {
-    return res.send({ minishop: '1.0' });
-});
-
 app.post('/product', function(req, res) {
     if (!req.body.name || !req.body.description || !req.body.price || !req.body.imgurl || !req.body.category)
         return res.status(400).send({error: 'name, description, price, category and imgurl needed'});
