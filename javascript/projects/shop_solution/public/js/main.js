@@ -13,7 +13,12 @@ document.addEventListener('click', function (event) {
         let id = event.target.getAttribute('data-id');
         showProductDetails(id);
     }
+    else if(event.target.matches('.btnpurchaseorder')) {
+        purchase();
+    }
 }, false);
+
+
 
 function showProductDetails(id) {
     let index = 0;
@@ -219,6 +224,32 @@ function loadProducts(category) {
     }
 
     xhr.send();
+}
+
+function purchase() {
+    let xhr = new XMLHttpRequest();
+    xhr.open('POST', 'http://localhost:3000/order');
+    xhr.setRequestHeader('Content-type', 'application/json');
+    xhr.onload = function() {
+        if(xhr.status === 200) {
+            let res = JSON.parse(xhr.responseText);
+            if(res.error === 0) {
+                alert('Thank you for your purchase!');
+                localStorage.setItem('cart', JSON.stringify([]));
+                location.reload();
+            }
+            else {
+                alert('Error: ' + res);
+            }
+        }
+    }
+
+    let cart = JSON.parse(localStorage.getItem('cart'));
+    let data = {
+        productids: cart
+    };
+
+    xhr.send(JSON.stringify(data));
 }
 
 loadProducts();
