@@ -1,5 +1,6 @@
 let thumbnailcontainerObj = document.getElementById('thumbnailcontainer');
 let productdetailsObj = document.getElementById('productdetails');
+let cartObj = document.getElementById('cart');
 let products = [];
 
 let cart = localStorage.getItem('cart');
@@ -26,6 +27,7 @@ function showProductDetails(id) {
     // index should point the right position in the array
     thumbnailcontainerObj.style.display = 'none';
     productdetailsObj.style.display = 'block';
+    cartObj.style.display = 'none';
 
     let productnameObj = document.getElementById('productname');
     productnameObj.innerHTML = products[index].name;
@@ -51,18 +53,117 @@ function showProductDetails(id) {
     btnaddcart.onclick = function() {
         let cart = JSON.parse(localStorage.getItem('cart'));
 
-        products[index].quantity = quantityObj.value;
-        cart.push(products[index]);
-        localStorage.setItem('cart', JSON.stringify(cart));
-        delete products[index].quantity;
+        let productExistsIndex = -1;
+        for(let i=0; i<cart.length; i++) {
+            if(cart[i].id === products[index].id) {
+                // product exists ...
+                productExistsIndex = i;
+                break;
+            }
+        }
+
+        if(productExistsIndex === -1) {
+            products[index].quantity = quantityObj.value;
+            cart.push(products[index]);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            delete products[index].quantity;
+        }
+        else {
+            let oldQuantity = parseInt(cart[productExistsIndex].quantity);
+            let newQuantity = oldQuantity + parseInt(quantityObj.value);
+            cart[productExistsIndex].quantity = newQuantity;
+            localStorage.setItem('cart', JSON.stringify(cart));
+        }
+
         showCart();
-        // task: implement the task feature for this
-        //       webshop
     }
 }
 
 function showCart() {
+    thumbnailcontainerObj.style.display = 'none';
+    productdetailsObj.style.display = 'none';
+    cartObj.style.display = 'block';
 
+    let cart = JSON.parse(localStorage.getItem('cart'));
+    if(cart.length === 0) {
+        cartObj.innerHTML = `
+            <h2>You do not have any items in your cart yet</h2>
+        `;
+        return;
+    }
+
+    /*
+        <div class="cart-item">
+        <div>
+            <img src="images/goodfellas.jpg" alt="" class="cart-picture">
+        </div>
+        <div class="cart-description">
+            <div>
+                <span class="cart-quantity">2</span> x
+                <span class="cart-productname">Good Fellas</span>:
+                <span class="cart-amount">40.00 €</span>
+                <button class="remove-item">Remove</button>
+            </div>
+        </div>
+        </div>
+    */
+
+    let total = 0;
+    cartObj.innerHTML = '';
+    for(let i=0; i<cart.length; i++) {
+        let newCartItem = `
+        <div class="cart-item" data-id="${cart[i].id}">
+            <div>
+                <img src="${cart[i].imgurl}" alt="" class="cart-picture">
+            </div>
+            <div class="cart-description">
+                <div>
+                    <span class="cart-quantity">${cart[i].quantity}</span> x
+                    <span class="cart-productname">${cart[i].name}</span>:
+                    <span class="cart-amount">${cart[i].price * cart[i].quantity} €</span>
+                    <button onclick="removeCartItem('${cart[i].id}')"  class="remove-item">Remove</button>
+                </div>
+            </div>            
+        </div>
+        `;
+        total += cart[i].quantity * cart[i].price;
+        cartObj.innerHTML += newCartItem;
+    }
+
+    cartObj.innerHTML += `
+        <hr class="cart-break">
+        <div class="cart-buy">
+            Total Amount: <span class="cart-totalamount" id="carttotalamount">${total}</span> € <button class="btnpurchaseorder">Buy Now</button>
+        </div>           
+    `;
+}
+
+function removeCartItem(id) {
+    let elem = document.querySelector('#cart div[data-id="'+id+'"]');
+    elem.parentNode.removeChild(elem);
+
+    let cart = JSON.parse(localStorage.getItem('cart'));
+    let removeIndex = 0;
+    let total = 0;
+    for(let i=0; i<cart.length; i++) {
+        if(cart[i].id === id) {
+            removeIndex = i;
+        }
+        else {
+            total += cart[i].quantity * cart[i].price;
+        }
+    }
+
+    cart.splice(removeIndex, 1);
+    let carttotalamountObj = document.getElementById('carttotalamount');
+    carttotalamountObj.innerHTML = total.toFixed(2);
+    localStorage.setItem('cart', JSON.stringify(cart));
+
+    if(cart.length === 0) {
+        cartObj.innerHTML = `
+            <h2>You do not have any items in your cart yet</h2>
+        `;        
+    }
 }
 
 function loadProducts(category) {
@@ -78,11 +179,12 @@ function loadProducts(category) {
         if(xhr.status === 200) {
             thumbnailcontainerObj.style.display = 'flex';
             productdetailsObj.style.display = 'none';
+            cartObj.style.display = 'none';
 
             thumbnailcontainerObj.innerHTML = '';
             console.log('successfull request');
             let resultObj = JSON.parse(xhr.responseText);
-            console.log( resultObj );
+            console.log(resultObj);
             products = resultObj.products;
         
             /* to create a div like this: 
