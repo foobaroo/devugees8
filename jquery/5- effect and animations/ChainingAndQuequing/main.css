@@ -1,0 +1,46 @@
+.link {
+    display: inline-block;
+    height: 34px;
+    width: 200px;
+    vertical-align: middle;
+    text-align: center;
+    border: solid 1px lightgoldenrodyellow;
+    color:darkorange;
+    cursor: pointer;
+    margin: 2px 0px;
+    line-height: 34px;
+}
+
+.link:hover {
+    border: solid 1px darkorange;
+    color:orangered;
+}
+
+.text {
+    font-family: sans-serif;
+    font-size: 44px;
+    color:#de1515;
+    opacity: 1.0;
+    margin-top:18px;
+    position: absolute;
+    
+}
+
+.noqueue_class {
+    left: 100px;
+    top: 100px;
+}
+
+.queue_class {
+    left: 100px;
+    top:200px;
+}
+
+.queueagain_class {
+    left:100px;
+    top:300px;
+}
+
+.highlight {
+    color: deepskyblue;
+}
