@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Markers</title>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+
+      function initMap() {
+
+        let startPosition = { lat: -25.363, lng: 131.044 };   // Australia     
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 10,
+          center: startPosition
+        });
+
+        // creating a position from a geocode
+        var geocoder =  new google.maps.Geocoder(); 
+        var locationName = 'New York, USA';
+        geocoder.geocode({ 'address': locationName }, 
+          function(results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+              let lat = results[0].geometry.location.lat();
+              let lng = results[0].geometry.location.lng();
+              
+              var newMarker = new google.maps.Marker({
+                position: { lat: lat, lng: lng },
+                map: map,
+                title: locationName
+              });	
+              
+              map.setCenter({ lat: lat, lng: lng });
+            } 
+            else {
+              alert('This location is invalid');
+            }
+          });
+
+
+          // moving the position
+          setTimeout(function() {
+            map.setCenter({ lat: 30.000, lng: 15.000 });
+            map.setZoom(5);
+          }, 5000);
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=APIKEY&callback=initMap">
+    </script>
+  </body>
+</html>
