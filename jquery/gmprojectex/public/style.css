@@ -3,3 +3,24 @@ html, body {
     margin: 0;
     padding: 0;
 }
+
+.container {
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+    background: rgb(240, 240, 240);
+}
+
+.navigation {
+    flex: 0 1 24px;
+    padding: 10px;
+}
+
+.content {
+    flex: 1 1 auto;
+}
+
+.footer {
+    flex: 0 1 40px;
+}
+

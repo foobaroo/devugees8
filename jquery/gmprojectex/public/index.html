@@ -2,16 +2,30 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Devugees: Introduction to JQuery</title>
+        <title>Google Maps Project</title>
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
         
+    <div class="container">
+        <div class="navigation">
+            <input type="text" class="location" placeholder="Berlin, Deutschland">
+            <button class="new-location">Add Location</button>
+            <button class="zoomout">Zoom Out</button>
+            <button class="remove-location">Remove Location: </button>
+            <select class="locations">
+
+            </select>
+        </div>
+        <div class="content" id="map"></div>
+        <div class="footer"></div>
+    </div>
+
     <script src="jquery-3.2.1.min.js" type="text/javascript"></script>
     <script src="main.js" type="text/javascript"></script>
 
     <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=APIKEY&callback=loadLocations">
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPL5FbwKVlLkZL0quNPnsi3dOpK-d59Ko&callback=loadLocations">
     </script>
     </body>
 </html>
