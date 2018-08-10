@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Jquery Youtube Fullscreen Background Video</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http:////maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <script src="source/jquery-3.2.1.min.js"></script>
+  <link rel="stylesheet" href="src/style.css">
+  <link rel="stylesheet" href="slick-1.8.1/slick/slick.css" />
+  <link rel="stylesheet" href="slick-1.8.1/slick/slick-theme.css" />
+  <script src="slick-1.8.1/slick/slick.min.js"></script>  
+</head>
+<body>
+
+  <div id="background-video" class="background-video">
+    <img src="images/placeholder.jpg" alt="" class="placeholder-image">
+  </div>
+
+  <div class="padding container">
+    <div class="navigation">
+      <span class="nav-cycling">Cycling</span> | <span class="nav-universe">Universe</span>
+    </div>
+
+    <div class="cycling">
+      <h1><b>Cycling in Berlin - One of my hobbys</b></h1>
+      <p class="artsytext">
+        I have one mountainbike and one speedbike, as well as a spinning bike 
+        in my living room.
+      </p>
+      <p class="artsytext">
+        <ul>
+          <li>A great way to stay in shape</li>
+          <li>A quick way to get anywhere</li>
+          <li>Quicker and cheaper than using the car</li>
+          <li>I hope my bike(s) never get stolen ...</li>
+        </ul>
+      </p>
+      <p class="artsytext">
+        <div class="bikes">
+          <div class="bike-image"><img src="images/bike_1.jpg" alt=""></div>
+          <div class="bike-image"><img src="images/bike_2.jpg" alt=""></div>
+          <div class="bike-image"><img src="images/bike_3.jpg" alt=""></div>
+        </div>      
+      </p>
+    </div>
+
+    <div class="universe">
+      <h1><b>The dimensions of the universe</b></h1>
+      <p class="artsytext">
+        If the radius of the earth was 1mm, the sun's would be 10cm. <br><br><b>Sticking to these ratios, how big would the radius be of the biggest known star Canis Mayoris 2?</b>
+      </p>
+      <p class="quiz">
+        <button class="answer-1">160 cm</button>
+        <button class="answer-2">162 cm</button>        
+        <button class="answer-3">200 m</button>        
+      </p>
+    </div>
+
+  </div>
+
+  <script src="src/jquery.youtubebackground.js"></script>
+  <script>
+    jQuery(function($) {
+      $('#background-video').YTPlayer({
+        fitToBackground: true,
+        videoId: 'JEReBXJ-Wjs',
+        pauseOnScroll: true,
+        callback: function() {
+          videoCallbackEvents();
+        }
+      });
+      
+      var videoCallbackEvents = function() {
+        var player = $('#background-video').data('ytPlayer').player;
+      
+        player.addEventListener('onStateChange', function(event){
+            console.log("Player State Change", event);
+
+            // OnStateChange Data
+            if (event.data === 0) {         
+                console.log('video ended');
+            }
+            else if (event.data === 2) {          
+              console.log('paused');
+            }
+        });
+      }
+
+      $('.bikes').slick({
+          infinite: true,
+          slidesToScroll: 3,
+          slidesToShow: 3
+      });      
+
+      $('.nav-cycling').on('click', function() {
+
+          $('.cycling').fadeIn();
+          $('.universe').hide();
+
+          $('#background-video').YTPlayer({
+          fitToBackground: true,
+          videoId: 'JEReBXJ-Wjs',
+          pauseOnScroll: true,
+          callback: function() {
+          videoCallbackEvents();
+          }
+        });        
+      });
+
+      $('.nav-universe').on('click', function() {
+
+          $('.cycling').hide();
+          $('.universe').fadeIn();
+
+          $('#background-video').YTPlayer({
+          fitToBackground: true,
+          videoId: 'ht2TigJp88w',
+          pauseOnScroll: true,
+          callback: function() {
+            videoCallbackEvents();
+          }
+        });        
+      });
+
+      $('.answer-1,.answer-2').on('click', function(e) {
+        alert('Incorrect');
+      });
+
+      $('.answer-3').on('click', function() {
+        // https://www.youtube.com/watch?v=i93Z7zljQ7I
+        
+          $('.universe').fadeOut();
+          $('.container').fadeOut();
+
+          $('#background-video').YTPlayer({
+          fitToBackground: true,
+          videoId: 'i93Z7zljQ7I',
+          pauseOnScroll: true,
+          callback: function() {
+            videoCallbackEvents();
+          }        
+          });
+      });
+
+    });
+  </script>
+</body>
+</html>
