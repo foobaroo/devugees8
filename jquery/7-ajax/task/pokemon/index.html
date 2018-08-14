@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Pokemon</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="pokemon.js"></script>
+
+  </head>
+  <body>
+    <div align="center">
+    <h1>Pokemon Go Games</h1>
+    </div>
+
+     <div class="main-container" id="main-view">
+
+       <div class="species-container" id="species-container">
+         <h1>Pokémon Species List View</h1>
+         <section class="filter-container">
+           Sort By : 
+           <select id="sort-by">
+             <option value="id">ID </option>
+             <option value="name">Name </option>
+             <option value="type">Type </option>
+           </select>
+           Order By : 
+           <select id="order-by">
+             <option value="asc">Ascending </option>
+             <option value="desc">Descending </option>
+           </select>
+         </section>
+        
+         <section class="list-view" id="pokemon-list-view" >   
+         </section>
+         
+         <section class="details-view" id="details-view" >
+         </section>
+       </div>
+
+       <div class="chain-container" id="chain-container">
+         <h1>Evolution Chain View</h1>
+         <section class="list-view" id="evolution-chain-view">
+         </section>
+       </div>
+
+     </div>
+    
+  </body>
+</html>
