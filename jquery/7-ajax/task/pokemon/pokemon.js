@@ -17,10 +17,12 @@ var Pokemon =  function () {
 	     init: function()
 	     {
 	         console.log("Application has started...");
+
 	         jQuery('#chain-container').hide();
 	         jQuery('#details-view').hide();
-	         
 	         jQuery('#main-view').on('click', Pokemon.actions.clickedAction); 
+	         jQuery('#sort-by').on('change', Pokemon.actions.changeAction); 
+	         jQuery('#order-by').on('change', Pokemon.actions.changeAction);
 	  	    
 	         Pokemon.displaySpeciesList();
 	     },
@@ -35,40 +37,57 @@ var Pokemon =  function () {
 						var id=e.target.id.replace("btn-", "");
 						//console.log("List item ", id, " was clicked!");
 						Pokemon.getEvolutionChain(id);
+						
 					}
 					if(e.target && e.target.nodeName == "DIV") 
 					{
 						var id=e.target.id.replace("details-", "");
 						Pokemon.showDetails(id);
+						
 					}
-					if(e.target && e.target.nodeName == "SELECT") 
-					{
-						//var value=e.target.value;
+					
+					e.preventDefault();
+			  },
+			  changeAction : function(event)
+			  {
 
-						//get current selected sort by value
-						var sortBy = jQuery("#sort-by");
-						var sortByValue = sortBy.options[sortBy.selectedIndex].value;
+			  			//get current selected sort by value
+						var sortBy = jQuery("#sort-by option:selected"); 
+						var sortByValue = sortBy.val();
+						console.log(sortByValue);
 						species.sort(Pokemon.actions.compareValues(sortByValue));
 
-						//get current selected order by value
-						var orderBy = jQuery("#order-by");
-						var orderByValue = orderBy.options[orderBy.selectedIndex].value;
+									  			//get current selected order by value
+						var orderBy = jQuery("#order-by option:selected");
+						var orderByValue = orderBy.val();
+						console.log(orderByValue);
 						if(orderByValue=='desc')
+						{
 							species.reverse();
+						}
 
 						jQuery('#pokemon-list-view').empty();
 
 						species.forEach(function(currentValue,index,array) {
 						  Pokemon.showSpecies(currentValue);
 						});
-					}
-					e.preventDefault();
+
+						event.preventDefault();
 			  },
 
-			  compareValues : function (propName, order='asc') 
+
+			  compareValues : function (propName) 
 			  {
 
 			  	  console.log("compareValues...");
+
+			  	  /*
+			  	  	function(a,b){
+					   if(a.v > b.v){ return 1}
+					    if(a.v < b.v){ return -1}
+					      return 0;
+					}
+					*/
 
 				  return function(a, b) 
 				  {
@@ -93,7 +112,7 @@ var Pokemon =  function () {
 
 				  };
 
-				},
+			 },
 	     },
 
 	     displaySpeciesList : function()
@@ -116,11 +135,12 @@ var Pokemon =  function () {
 		 		jQuery('#pokemon-list-view').append('<p class="status-message-load"></p>');
 
 
-
 				jQuery.ajax({
+					//url:'https://pokeapi.co/api/v2/pokemon?offset=0&limit='+id,
 					url:'https://pokeapi.co/api/v2/pokemon/'+id,
 					type:'GET',
 					async: true,
+					crossOrigin: true,
 					dataType: 'json',
 					contentType: 'application/json; charset=utf-8',
 					beforeSend: function(jqXHR,settings){
@@ -131,9 +151,19 @@ var Pokemon =  function () {
 						//console.log(data);
 						if(jQXhr.status==200)
 						{
-								//var newItem=new Species(data);
+								
 
-								var newItem = {
+								/* if we use offset and limit
+								console.log(data.results);
+								data.results.forEach(function(currentValue,index,obj) 
+								{
+									  var url=obj.url;
+								  	  var id = url.split("pokemon/");
+								      id=id[1].replace('/', '');
+								});
+								 */
+
+								 var newItem = {
 
 									 	id : data.id,
 									    name : data.name,
