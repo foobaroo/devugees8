@@ -51,4 +51,35 @@ let usersJson = JSON.stringify(users);
 
 fs.writeFileSync('./users.json', usersJson);
 
-fs.unlinkSync('./users.json');
+// fs.unlinkSync('/home/jan/Desktop/deleteme');
+
+var filelist = fs.readdirSync('/home/jan/Desktop');
+
+for(let i=0; i<filelist.length; i++) {
+    console.log(filelist[i]);
+}
+
+console.log('number of files: ' + filelist.length);
+
+let info1 = fs.lstatSync('./person.json');
+let info2 = fs.lstatSync('./level1');
+
+if( info1.isFile() ) {
+    console.log('its a file');
+}
+else {
+    console.log('its a folder');
+}
+
+if( info2.isFile() ) {
+    console.log('its a file');
+}
+else {
+    console.log('its a folder');
+}
+
+// task:
+//
+// a) console log out all JPEG images that are in the image folder
+// b) afterwards, delete all images that are NOT JPEG
+
