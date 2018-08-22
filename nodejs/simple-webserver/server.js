@@ -52,7 +52,6 @@ app.post('/user', function(req, res) {
                                 return res.send({ message: 'user has been saved' });
                             });
     });
-
 });
 
 app.get('/user', function(req, res) {
