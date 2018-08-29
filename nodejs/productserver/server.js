@@ -8,7 +8,9 @@ if(!fs.existsSync(__dirname + '/products.json')) {
     fs.writeFileSync(__dirname + '/products.json', '[]', 'utf-8');
 }
 
-app.use( bodyParser.json() );
+app.use(bodyParser.json());
+app.use('/', express.static(__dirname + '/public'));
+
 app.get('/', function(req, res) {
     return res.send({ productapi: '1.0' });
 });
