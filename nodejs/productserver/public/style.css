@@ -19,7 +19,7 @@ h2 {
 }
 
 .content {
-    display: none; /*flex;*/
+    display: flex;
     justify-content: flex-start;
     flex-wrap: wrap;
 }
@@ -44,6 +44,10 @@ h2 {
 
 .navlink:hover {
     cursor: pointer;
+}
+
+.addproduct {
+    display: none;
 }
 
 .formelements {
