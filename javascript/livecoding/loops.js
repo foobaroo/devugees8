@@ -33,8 +33,8 @@ var x = [];
 var y = [0];
 var z = [0, 1];
 
-x.push(y);
-x.push(z);
+x.push( y );
+x.push( z );
 
 console.log(x);
 
