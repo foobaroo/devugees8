@@ -1,0 +1,12 @@
+.link {
+    display: inline-block;
+    height: 34px;
+    width: 200px;
+    vertical-align: middle;
+    text-align: center;
+    border: solid 1px dodgerblue;
+    color:dodgerblue;
+    cursor: pointer;
+    margin: 2px 0px;
+    line-height: 34px;
+}

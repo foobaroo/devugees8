@@ -1,0 +1,51 @@
+truncate table customers;
+truncate table orders;
+truncate table order_details;
+truncate table products;
+
+-- 1 get all customers that live in berlin
+select * from customers where city = 'Berlin';
+-- 1b get all customers that live in berlin by their firstname in alphabetical order
+select * from customers where city = 'Berlin' order by firstname asc;
+
+-- 2 get all customers whose firstname starts with the letter 'K'
+select * from customers where upper(firstname) like 'K%';
+
+-- 3 get customers whose lastname ends with an 'A' or with an 'N'
+select * from customers where upper(lastname) like '%A' or upper(lastname) like '%N';
+
+-- 4a get the current year and the year of the birthdates of all customers
+select year(now()), year(birthdate) from customers;
+-- 4b get the firstname, the lastname and the age of all customers
+select firstname, lastname, YEAR(now()) - YEAR(birthdate) as age from customers;
+-- 4c get the firstname, the lastname and the age of all customers, start with the oldest ones
+select firstname, lastname, YEAR(now()) - YEAR(birthdate) as age from customers order by age desc;
+
+-- 5 get the firstname, the lastname and the age of customers who are younger than 27, put the youngest first
+select firstname, lastname, YEAR(now()) - YEAR(birthdate) as age 
+from customers 
+where YEAR(now()) - YEAR(birthdate) < 27 order by age asc;
+-- 6 get all customers who are older than 27 and younger than 35
+select firstname, lastname from customers where YEAR(now()) - YEAR(birthdate) between 27 and 35;
+-- 7 get the oldest 5 customers who have a google account
+select * from customers where email like '%googlemail%' order by birthdate asc limit 0, 5;
+-- 8 get all customers who registered after 7 PM.
+select * from customers where time(registered) > '19:00' order by time(registered) asc;
+-- 9 get all lastnames from customers in a list without any duplicates (no lastname mentioned twice or more)
+select distinct lastname from customers;
+
+
+-- 10 how many customers from berlin do we have?
+select count(*) from customers where city = 'Berlin';
+-- 11 how many customers from berlin or Leipzig do we have
+select count(*) from customers where city in ('Berlin', 'Leipzig');
+-- 12a how many customers per city do we have?
+select count(*) as customer_per_city, city from customers group by city;
+-- 12b how many customers per city do we have? order by the biggest city
+select count(*) as customer_per_city, city from customers group by city order by customer_per_city desc;
+-- 13 what is the average age of our typical customer?
+select avg(YEAR(now()) - YEAR(birthdate)) as avg_age from customers;
+-- 14 how many customers registered in 2012?
+select count(*) from customers where year(registered) = '2012';
+-- 15 how old is the youngest customer from berlin?
+select min(YEAR(now()) - YEAR(birthdate)), city as age from customers group by city;

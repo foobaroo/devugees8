@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Product API Frontend</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h2>Product API Frontend</h2>
+            <div class="navigation">
+                <div><input type="text" class="searchbox" placeholder="searchterm ..." /><button id="btn-search">search...</button></div>
+                <div>                <span class="navlink" id="navlink-startpage">Startpage</span> | 
+                    <span class="navlink" id="navlink-product">Add Product</span></div>
+            </div>
+        </div>
+        <div class="content">
+        </div>
+
+        <div class="addproduct">
+            <div class="formelements">
+                <input type="text" id="title" placeholder="Enter title...">
+                <input type="text" id="price" placeholder="Enter price...">
+                <select id="type">
+                    <option value="book" selected>Book</option>
+                    <option value="music">Music</option>
+                    <option value="movie">Movie</option>
+                </select>
+                <textarea id="description" cols="30" rows="10" placeholder="Enter description..."></textarea>
+                <input type="text" id="imageurl" placeholder="Enter image URL...">
+                <button id="btn-addproduct">Add Product</button>           
+            </div>
+        </div>
+    </div>
+    <script src="jquery.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>

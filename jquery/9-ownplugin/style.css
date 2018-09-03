@@ -1,0 +1,18 @@
+.car-image {
+    display: inline-block;
+    top: 50px;
+    width: 200px;
+    border: solid 1px slategray;
+    margin: 8px;
+    padding: 8px;
+    line-height: 34px;
+}
+
+.car-image:hover {
+    border: solid 1px black;
+}
+
+img {
+    height: 100%;
+    width: 100%;
+}

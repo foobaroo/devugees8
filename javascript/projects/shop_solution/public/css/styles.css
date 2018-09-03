@@ -1,0 +1,187 @@
+* {
+    padding: 0px;
+    margin: 0px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+body {
+    width: 100%;
+    background: #797979b2;
+}
+
+a {
+    color: cornflowerblue;
+}
+
+.container {
+    margin: 0 auto;
+    min-width: 600px;
+    width: 90%;
+    height: 100%;
+}
+
+.logo {
+    padding: 5px;
+    font-size: 2em;
+    background: rgb(240, 240, 240);
+    color: #1a1a1a;
+}
+
+.navigation {
+    padding: 10px;
+    background: rgb(240, 240, 240);
+    display: flex;
+    justify-content: space-between;
+}
+
+.thumbnail-container {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    padding: 10px;
+    align-items: center;
+    background: #4b4b4b;
+    /* display: none; */
+}
+
+.thumbnail {
+    width: 250px;
+    height: 180px;
+    margin: 5px 10px;
+    /* background: #1a1a1a; */
+    background: url('../images/goodfellas.jpg') center center;
+    cursor: pointer;
+    box-shadow: 0 4px 8px 0 rgb(31, 31, 31, 0.2), 0 6px 20px 0 rgba(31, 31, 31, 0.19);
+}
+
+.thumbnail-name {
+    padding: 2px;
+    text-decoration: underline;
+    background: rgba(240, 240, 240, 0.6);
+}
+
+.thumbnail-price {
+    font-weight: bold;
+    padding: 2px;
+    text-align: right;
+    color: rgb(12, 12, 12);
+    background: rgba(240, 240, 240, 0.6);
+}
+
+.product-details {
+    background: #4b4b4b;
+    display: none;
+}
+
+.product-container {
+    padding: 20px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.product-image {
+    padding: 0px 20px;
+}
+
+.product-image img {
+    width: 280px;
+    height: 260px;
+}
+
+.product-description {
+    margin-top: 20px;
+}
+
+.product-buy {
+    margin-top: 15px;
+}
+
+.quantity {
+    width: 40px;
+    font-size: 16px;
+}
+
+.btnaddcart {
+    margin-left: 10px;
+    margin-top: 20px;
+    font-size: 16px;
+    padding: 4px;
+}
+
+.cart {
+    background: #4b4b4b;
+    padding: 10px;
+    display: none;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 50px;
+}
+
+.cart-picture {
+    width: 120px;
+}
+
+.cart-description {
+    font-size: 28px;
+    padding: 12px;
+    vertical-align: bottom;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.remove-item {
+    margin-top: 5px;
+    padding: 4px;
+    font-size: 22px;
+    cursor: pointer;
+    display: block;
+}
+
+.cart-break {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.cart-buy {
+    margin-left: 50px;
+    margin-top: 20px;
+    padding-left: 132px; 
+}
+
+.cart-totalamount {
+    font-size: 26px;
+}
+
+.btnpurchaseorder {
+    padding: 4px;
+    margin-left: 15px;
+    font-size: 26px;
+}
+
+@media only screen and (max-width: 600px) {
+    .container {
+        min-width: auto;
+    }
+
+    .product-container {
+        display: block;
+    }
+
+    .product-image img {
+        width: 240px;
+    }
+
+    .cart-item {
+        display: block;
+    }
+
+    .cart-buy {
+        margin-left: 0px;
+        padding-left: 10px;
+    }
+
+}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Propagation of events</title>
+</head>
+<body>
+    <div id="parenta">
+        <div id="childa">
+            child A
+        </div>
+    </div>
+    <div id="parentb">
+            <div id="childb">
+                child B
+            </div>
+        </div>    
+    <script type="text/javascript">
+        let parentaObj = document.getElementById('parenta');
+        let childaObj = document.getElementById('childa');
+        let parentbObj = document.getElementById('parentb');
+        let childbObj = document.getElementById('childb');        
+
+        childaObj.onclick = function() {
+            alert('clicked child');
+        }
+
+        parentaObj.onclick = function() {
+            alert('clicked parent');
+        }
+
+        childbObj.onclick = function(e) {
+            alert('clicked child');
+            e.stopPropagation();
+        }
+
+        parentbObj.onclick = function() {
+            alert('clicked parent');
+        }        
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<html>
+    <head>
+        <link href="/assets/style.css" type="text/css" rel="stylesheet" />
+    </head>
+    <body>
+        <h1>Users List!</h1>
+        <table>
+            <thead>
+                <th>ID</th>
+                <th>UserName</th>
+                <th>Password</th>
+                <th>Profession</th>
+                <th>Action</th>
+            </thead>
+            <tbody>
+                <% userList.forEach((user,index,users) => {
+                    
+                     %>
+                    <tr>
+                      <td><%= user.id %></td><td><%= user.name %></td><td><%= user.password %></td><td><%= user.profession %></td><td><a href="/deleteUser/<%=user.id%>">Delete</a></td>
+                    </tr>
+                    <%
+                    
+                });
+                %>
+                
+            </tbody>
+        </table>
+
+        
+    </body>
+</html>

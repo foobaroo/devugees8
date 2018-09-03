@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs -->
+  <meta charset="utf-8">
+  <title>Users & Comments List</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css">
+
+  <!-- JS  -->
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="main.js"></script>
+
+
+</head>
+<body>
+
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <div class="container">
+
+  <div class="row">
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-item nav-link active" href="#" id="userlink">Users <span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link" href="#" id="commentslink">Comments</a>
+        <a class="nav-item nav-link" href="#" id="adduserlink">Add User</a>
+        <a class="nav-item nav-link disabled" href="#" id="addcommentlink">Add Comment</a>
+      </div>
+    </div>
+  </nav>
+</div>
+    
+   
+
+    <p class="status-message-load"></p>
+    <div id="main" class="row">
+    </div>
+
+
+    
+
+    <div id="adduser" class="row" style="display: none">
+      <form id="user-form">
+      <p class="status-message"></p>
+      <div class="form-group">
+        <label for="firstnameinput">FirstName</label>
+        <input type="text" class="form-control" id="firstnameinput" placeholder="first name">
+      </div>
+      <div class="form-group">
+        <label for="usernameinput">Username</label>
+        <input type="text" class="form-control" id="usernameinput" placeholder="user name">
+      </div>
+      <div class="form-group">
+        <label for="emailinput">Email address</label>
+        <input type="email" class="form-control" id="emailinput"  placeholder="email">
+      </div>
+      <button type="submit" class="btn btn-primary" id="adduserbutton">Add User</button>
+     </form>
+    </div>
+
+    <div id="addcomment" class="row" style="display: none">
+      <form id="comment-form">
+      <p class="status-message"></p>
+      <div class="form-group">
+        <label for="commentnameinput">Name</label>
+        <input type="text" class="form-control" id="commentnameinput" placeholder="name">
+      </div>
+      <div class="form-group">
+        <label for="commentmailinput">Email address</label>
+        <input type="email" class="form-control" id="commentmailinput"  placeholder="email">
+      </div>
+      <div class="form-group">
+        <label for="commentbodyinput">Comment</label>
+        <input type="textarea" class="form-control" id="commentbodyinput"  placeholder="a nice comment">
+      </div>
+      <button type="submit" class="btn btn-primary" id="addcommentbutton">Add Comment</button>
+     </form>
+    </div>
+
+  </div>
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+ 
+</body>
+</html>

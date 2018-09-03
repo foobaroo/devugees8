@@ -1,0 +1,9 @@
+.box {
+    height: 100px;
+    width: 250px;
+    vertical-align: middle;
+    text-align: center;
+    border: solid 1px gray;
+    margin: 2px 0px;
+    font-size: 20px;
+}

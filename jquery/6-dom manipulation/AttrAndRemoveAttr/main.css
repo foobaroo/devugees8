@@ -1,0 +1,42 @@
+.link {
+    display: inline-block;
+    height: 34px;
+    width: 150px;
+    vertical-align: middle;
+    text-align: center;
+    border: solid 1px lightgreen;
+    color:green;
+    cursor: pointer;
+    margin: 2px 0px;
+    line-height: 34px;
+}
+
+.link:hover {
+    border: solid 1px darkgreen;
+    color:darkolivegreen;
+}
+
+.text {
+    font-family: sans-serif;
+    font-size: 32px;
+    color:#de1515;
+    opacity: 1.0;
+    margin-top:18px;
+    border: solid 1px #de1515;
+    width:306px;
+    height: 200px;
+   /* position: absolute;
+    left: 50px;
+    top:50px; */
+    
+}
+
+input {
+    /* display: inline-block; */
+    height: 28px;
+    width:304px;
+    border: solid 1px gray;
+    color: darkslategray;
+    margin:2px 0px;
+    line-height: 28px;
+}
