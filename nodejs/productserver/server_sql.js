@@ -1,40 +1,29 @@
 const express = require('express');
-const fs = require('fs');
 const randomstring = require('randomstring');
 const bodyParser = require('body-parser');
 const app = express();
+const mysql = require('mysql');
+
+let con = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: 'foobar',
+    database: 'productserver'
+});
 
 app.use(bodyParser.json());
 
-let productFile = __dirname + '/products.json';
-
-if(!fs.existsSync(productFile)) {
-    fs.writeFileSync(productFile, '[]', 'utf-8');
-}
-
 app.get('/products', function(req, res) {
-    fs.readFile(productFile, 'utf-8',
-    function(err, data) {
-        if(err) return res.send({err: err});
+    let sql = 'select * from products';
 
-        let products = JSON.parse(data);
+    if(req.query.q) {
+        sql += ' where lower(title) like lower(?) or lower(description) like lower(?)';
+    }
 
-        if(!req.query.q) {
-            return res.send(products);
-        }
+    con.query(sql, ['%'+req.query.q+'%', '%'+req.query.q+'%'], function(err, data) {
+        if(err) return res.send({ error: err });
 
-        let q = req.query.q.toLowerCase();
-        let resultProducts = [];
-
-        for(let i=0; i<products.length; i++) {
-            let targetString = products[i].title.toLowerCase() + products[i].description.toLowerCase();
-
-            if(targetString.includes(q)) {
-                resultProducts.push(products[i]);
-            }
-        }
-
-        return res.send(resultProducts);
+        return res.send(data);
     });
 });
 
@@ -43,58 +32,14 @@ app.post('/products', function(req, res) {
         return res.send({ error: 'invalid request' });
     }
 
-    fs.readFile(productFile, 'utf-8', function(err, data) {
-        if(err) return res.send({ err: err });
 
-        let products = JSON.parse(data);
-        let newProduct = {
-            title: req.body.title,
-            description: req.body.description,
-            price: req.body.price,
-            type: req.body.type,
-            imageurl: req.body.imageurl,
-            id: randomstring.generate(20)
-        };
-
-        products.push(newProduct);
-        let productsJSON = JSON.stringify(products);
-
-        fs.writeFile(productFile, productsJSON, 'utf-8', function(err) {
-            if(err) return res.send({ err: err });
-
-            return res.send( newProduct );
-        })
-    });
 });
 
+// task: implement delete method
+// take a look at devugees8/nodejs/sql/nodesql/main.js
+
 app.delete('/products/:id', function(req, res) {
-    fs.readFile(productFile, 'utf-8', function(err, data) {
-        if(err) return res.send({ err: err });
 
-        let products = JSON.parse(data);
-        let productFound = false;
-
-        for(let i=0; i<products.length; i++) {
-            if(products[i].id === req.params.id) {
-                products.splice(i, 1);
-                productFound = true;
-                break;
-            }
-        }
-
-        if(!productFound) {
-            return res.send({ error: 'invalid id' });
-        }
-
-        let productJSON = JSON.stringify(products);
-
-        fs.writeFile(productFile, productJSON, 'utf-8', function(err) {
-            if(err) return res.send({ err: err});
-
-            return res.send({ error: 0, deleted: req.params.id });
-        });
-
-    });
 });
 
 app.listen( 3000 );
