@@ -12,7 +12,6 @@ let con = mysql.createConnection({
 });
 
 app.use(bodyParser.json());
-
 app.get('/products', function(req, res) {
     let sql = 'select * from products';
 
@@ -32,14 +31,41 @@ app.post('/products', function(req, res) {
         return res.send({ error: 'invalid request' });
     }
 
+    let sql = `insert into products 
+    (title, description, price, imageurl, type) 
+    values (?, ?, ?, ?, ?)`;
+
+    let values = [
+        req.body.title,
+        req.body.description,
+        req.body.price,
+        req.body.imageurl,
+        req.body.type,
+    ];
+
+    con.query(sql, values, function(err, data) {
+        if(err) return res.send({ error: err });
+
+        return res.send({ error: 0, insertId: data.insertId });
+    });
 
 });
 
+// Query Parameter: halloworld.com/users?abc=123&xyz=789
+//
+// Parameter: halloworld.com/users/123
+//            halloworld.com/orders/456
 // task: implement delete method
 // take a look at devugees8/nodejs/sql/nodesql/main.js
 
 app.delete('/products/:id', function(req, res) {
-
+    let sql = 'delete from products where id = ?';
+    
+    con.query(sql, [req.params.id], function(err, data) {
+        if(err) return res.send({ error: err });
+        
+        return res.send(data);
+    });
 });
 
-app.listen( 3000 );
+app.listen(3000);
