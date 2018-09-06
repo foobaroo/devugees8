@@ -13,8 +13,6 @@ app.get('/', function(req, res) {
     return res.send({ 'crudapi': '1.0' });
 });
 
-// no query parameter id: return all users
-// query parameter id: return user with id query id
 app.get('/student', function(req, res) {
     MongoClient.connect(url, function(err, db) {
         if(err) return res.send({ error: err });
@@ -68,6 +66,55 @@ app.post('/student', function(req, res) {
 
             db.close();
             return res.send({ error: 0, insertId: dbres.insertedId });
+        });
+    });
+});
+
+app.delete('/student/:id', function(req, res) {
+        MongoClient.connect(url, function(err, db) {
+            if(err) return res.send({ error: err });
+    
+            var dbo = db.db('studentdb');
+
+            let mongoId = null;
+            try {
+                mongoId = new mongo.ObjectId(req.params.id);
+            }
+            catch(err) {
+                return res.send({ error: err });
+            }
+
+            dbo.collection('students').deleteOne({'_id': mongoId}, function(err, dbres) {
+                if(err) return res.send({ error: err });
+
+                db.close();
+                return res.send(dbres);
+            });
+        });
+
+});
+
+app.put('/student/:id', function(req, res) {
+    MongoClient.connect(url, function(err, db) {
+        if(err) return res.send({ error: err });
+
+        var dbo = db.db('studentdb');
+
+        let mongoId = null;
+        try {
+            mongoId = new mongo.ObjectId(req.params.id);
+        }
+        catch(err) {
+            return res.send({ error: err });
+        }    
+
+        let newValues = { $set: req.body };
+        
+        dbo.collection('students').updateOne({_id: mongoId}, newValues, function(err, dbres) {
+            if(err) return res.send({ error: err });
+            
+            db.close();
+            return res.send({ error: 0, result: dbres });
         });
     });
 });
