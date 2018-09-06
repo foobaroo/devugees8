@@ -8,7 +8,7 @@
             "type": "node",
             "request": "launch",
             "name": "Launch Program",
-            "program": "${workspaceFolder}/server_sql.js"
+            "program": "${workspaceFolder}/server_mongo.js"
         }
     ]
 }
