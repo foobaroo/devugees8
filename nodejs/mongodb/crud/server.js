@@ -47,6 +47,29 @@ app.get('/student', function(req, res) {
     });
 });
 
+app.post('/student', function(req, res) {
+    if(!req.body.name || !req.body.age || !req.body.subjects || !req.body.address) {
+        return res.send({ error: 'name, age, subjects and address required' });
+    }
 
+    MongoClient.connect(url, function(err, db) {
+        if(err) return res.send({ error: err });
+
+        var dbo = db.db('studentdb');
+        var newStudent = {
+            name: req.body.name,
+            age: req.body.age,
+            subjects: req.body.subjects,
+            address: req.body.address
+        };
+
+        dbo.collection('students').insertOne(newStudent, function(err, dbres) {
+            if(err) return res.send({ error: err });
+
+            db.close();
+            return res.send({ error: 0, insertId: dbres.insertedId });
+        });
+    });
+});
 
 app.listen( 3000 );
