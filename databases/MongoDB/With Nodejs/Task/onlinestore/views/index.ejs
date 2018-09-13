@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>NodeJS MondoDB example - View Insert, Update, Delete records</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+
+    <div class="container">
+        <h1> <%=title %> NodeJS MondoDB example - View Insert, Update, Delete records </h1>
+      <div class="success"></div>
+      <div class="error"></div>
+
+      <form id="form1" action="/add" method="POST">
+          <input type="hidden" name="id" value="">
+          <table>
+            <tr>
+              <td style='text-align: center'>
+                <input type="text" name="product_name" placeholder='Product Name' value=''>
+                <input type="text" name="price" placeholder='Price' value=''>
+                <input type="text" name="category" placeholder='Category' value=''>
+                <input type="submit" name="sub" placeholder='Category' value='Add Product'>
+              </td>
+            </tr>
+          </table>
+        </form>
+
+        <table>
+          <tbody>
+            <tr>
+              <th>ID</th>
+              <th>Product Name</th>
+              <th>Price</th>
+              <th>Category</th>
+              <th>Action</th>
+            </tr>
+              <% if(data.length) { %>
+              <% data.forEach(function(item) { %>
+                <tr>
+                  <td>
+                    <%=item['_id'] %>
+                  </td>
+                  <td>
+                    <%=item['product_name'] %>
+                  </td>
+                  <td>
+                    <%=item['price'] %>
+                  </td>
+                  <td>
+                    <%=item['category'] %>
+                  </td>
+                  <td>
+                    <a class="editlink" href="/fetchdata?id=<%=item['_id'] %>" data-id="<%=item['_id'] %>">Edit</a>
+                    | &nbsp;&nbsp;
+                    <a href="/delete?id=<%=item['_id'] %>" onclick="return confirm('You are going to delete this record. Continue?')">Delete</a>
+                  </td>
+                </tr>
+             <% }); } %>
+            </tbody>
+        </table>
+
+    </div>
+  </body>
+</html>
+
+
+
+
+
+
+
+   
+
+      

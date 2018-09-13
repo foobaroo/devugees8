@@ -1,0 +1,312 @@
+//check which current database we are using
+db
+
+//if you have error and you want to continue with command then run the following command
+ctrl + c
+
+//if you are not using your choice of databse then switch to your choice db using "use" command
+//if database is not exist then it will also create new database.
+use example
+
+//check wheather things collections has any record or not
+db.things.find().pretty();
+
+//collections will not show until collections do not have any data
+show collections
+student
+students
+
+//now add some datas to collections to "things"
+for(var i=0; i<10; i++) { db.things.insert({ x: i  });  }
+
+//again run command show collections then it will show things
+show collections
+student
+students
+things
+
+//now update the recods in loop : case 1
+
+for(var i=0; i<10; i++) { db.things.update({ x: i  }, { $set :{ x: 'test'+i }  });  }
+
+//update the records in loop : case 2
+
+for(var i=0; i<10; i++) { db.things.update({ x: i  }, { $set :{ x: 1+i }  });  }
+
+
+//update the records in loop: case 3
+
+for(var i=0; i<10; i++) { db.things.update({ x: 'test'+i  }, { $set :{ x: 1+i }  });  }
+
+
+//remove all data of the things collections
+
+db.things.remove({});
+
+//run again command show collections and check 
+show collections 
+
+//drop whole things collections
+db.things.drop();
+
+//again run show command and it will not show things collection
+show collections
+
+
+//insert again data to things collections
+for(var i=0; i<20; i++) { db.things.insert({ x: i}); : 6 };
+
+//Or Operator
+
+//x equals 2 or x equals 4
+db.things.find( { $or: [ { x: 2}, {x: 4} ] } );
+
+//Task: find all things where x equals 2 or x>6
+
+db.things.find( { $or : [ { x: 2 }, { x: { $gt : 6 } } ] } );
+
+//Task: x > 15 AND x < 20
+
+db.things.find( { $and : [ { x: { $gt: 15} }, { x: { $lt : 20 } } ] } );
+
+//Task: Show all documents/data that are between 0 AND 5 OR between 15 AND 20
+
+// Main condition : OR
+// Condition 1: between 0 AND 5 
+// { $and: [ { x: { $gt: 0} }, { x: { $lt: 5} } ]},
+// Condition 2: between 15 AND 20
+// { $and: [ { x: { $gt: 15} },{ x: { $lt: 20} } ]} 
+
+db.things.find({ 
+
+$or :[ 
+	{ $and: [ { x: { $gt: 0} }, { x: { $lt: 5} } ]}, 	 { $and: [ { x: { $gt: 15} },{ x: { $lt: 20} } ]} 
+     ]  
+});
+
+//Copying documents from one collections to another collections, e.g otherThings
+//before copying, first check there is record or not using findOne method.
+
+db.things.findOne();
+
+db.things.find({ x: { $gt: 10 } }).forEach(
+function(document)
+{
+db.otherThings.insert(document)
+});
+
+//for checking wheather records are copied or not
+db.otherThings.find().pretty();
+
+//Task: add all numbers from things that are even to the collection evenThings. Therefore, look up the operator $mod on the google.
+
+db.things.find({ x: { $mod: [2,0] } }).forEach(
+function(document)
+{
+db.evenThings.insert(document)
+});
+
+//Task: add all numbers from things that are odd to the collection oddThings. 
+
+db.things.find({ x: { $mod: [2,1] } }).forEach(
+function(document)
+{
+db.oddThings.insert(document)
+});
+
+
+//Students queries
+
+db.students.insert([
+
+{ name: 'mark', age:31, subjects: ['math','journalism','prgramming'],gender: 'm'},
+{ name: 'sandra', age:28, subjects: ['sport','german','english'],gender: 'f'},
+{ name: 'paul', age:20, subjects: ['history','english','math'],gender: 'm'},
+{ name: 'stefan', age:22, subjects: ['arabic','english','history'],gender: 'm'},
+{ name: 'katja', age:29, subjects: ['history','german','arabic'],gender: 'f'},
+{ name: 'julia', age:25, subjects: ['german','sport','math'],gender: 'f'}
+
+]);
+
+
+//Task : Find all documents which has name sandra or katja.
+
+db.students.find( { $or: [ { name: 'katja'}, {name: 'sandra'} ] } );
+
+or
+
+db.students.find( { $or: [ { name: 'katja'}, {name: 'sandra'} ] } ).pretty();
+
+
+//Task :  Find all documents which has name sandra or age is greater than 25
+
+db.students.find( { $or: [ { name: 'sandra'}, {age: {$gt: 25} } ] } ).pretty();
+
+
+//Task : Find all students who are enrolled in arabic
+
+db.students.find( { subjects: 'arabic'} );
+
+or 
+
+db.students.find( { subjects: { $in: ['arabic'] } } );
+
+
+//Task : Find all students who are (between 25 AND 30 ) AND (are enrolled in history).
+
+db.students.find( {
+
+$and : [ { $and : [ { age: {$gt : 25} },  { age: {$lt : 30} } ] }, 
+{ subjects: {$in : ['history']} } ] 
+
+});
+
+OR
+
+db.students.find( {
+
+$and : [  { age: {$gt : 25} },  { age: {$lt : 30} }  ], 
+subjects: {$in : ['history']} 
+
+});
+
+//Task : Find all students who are not enrolled in history.
+
+db.students.find( { subjects: { $nin: ['history'] } } );
+
+OR
+
+db.students.find( { subjects: { $not : { $in: ['history'] } } } );
+
+
+//Task : Find all students who are (enrolled in math) AND (not in sport).
+
+db.students.find({
+	$and : [{subjects: { $in: ['math'] } },{ subjects: { $nin: ['sport'] }}]
+});
+
+
+//Aggregation functions (group by)
+
+db.students.aggregate( { $group : {_id: "$gender"} } );
+
+OR
+
+db.students.aggregate( [ { $group : {_id: "$gender"} } ] );
+
+
+//now adding a aggregation function for the sum
+
+db.students.aggregate( { $group : {_id: "$gender", result: {$sum:1 } } } );
+
+
+//maximum age per gender
+
+db.students.aggregate( { $group : {_id: "$gender", maxage: {$max: "$age" } } } );
+
+
+//minimum age per gender
+
+db.students.aggregate( { $group : {_id: "$gender", minage: {$min: "$age" } } } );
+
+
+//Task: Find the average age per gender
+
+db.students.aggregate( { $group : {_id: "$gender", avgage: {$avg: "$age" } } } );
+
+//Task: Find the average age in total of all students.
+
+db.students.aggregate( { $group : {_id: null, avgage: {$avg: "$age" } } } );
+
+
+// nested documents 
+
+db.foos.insert({x:1});
+db.foos.find();
+db.foos.insert({x:2, y:{z:1}});
+
+db.foos.find();
+db.foos.find({x:1});
+db.foos.find({y:{z:1}});
+db.foos.insert({x:3, y:{z:1, b:5}});
+// no result here
+db.foos.find({y:{z:1}});
+db.foos.find({"y.z":1});
+
+
+db.createCollection('someLetters');
+db.someLetters.insert([
+ {str: 'AA'},
+ {str: 'AB'},
+ {str: 'CC'},
+ {str: 'CE'}
+]);
+
+
+db.someLetters.find({str: /A/});
+{ "_id" : ObjectId("5a666341b96f5fde2b1939ee"), "str" : "AA" }
+{ "_id" : ObjectId("5a666341b96f5fde2b1939ef"), "str" : "AB" }
+
+db.someLetters.find({str: /^A/});
+{ "_id" : ObjectId("5a666341b96f5fde2b1939ee"), "str" : "AA" }
+{ "_id" : ObjectId("5a666341b96f5fde2b1939ef"), "str" : "AB" }
+
+db.someLetters.find({str: /^A$/});
+db.someLetters.find({str: /A$/});
+
+{ "_id" : ObjectId("5a666341b96f5fde2b1939ee"), "str" : "AA" }
+
+
+
+
+db.customers.insert(
+[
+	{
+	 firstname: 'anton',
+	 lastname: 'meier',
+	 birthdate: new Date("1989-04-02"),
+	 address:
+		 { street: 'Hauptstr. 1', postal: '13305', city: 'Berlin' },
+	 orders: [
+		   {sum: 120, created: new Date("2018-01-04")},
+		   {sum: 140, created: new Date("2018-01-07")}
+		 ]
+	},
+	{
+	 name: 'julia',
+	 lastname: 'mueller',
+	 birthdate: new Date("1972-08-10"),
+	 address: { street: 'Schillerstr. 5', postal: '12345', city: 'Osnabrueck' },
+	 orders: [
+		{sum: 50, created: new Date("2018-01-04")},
+		{sum: 70, created: new Date("2018-01-07")},
+		{sum: 90, created: new Date("2018-01-10")}
+		 ]
+	},
+	{
+	 firstname: 'gert',
+	 lastname: 'hamilkov',
+	 birthdate: new Date("1985-05-12"),
+	 address:{ street: 'Schillerstr. 15', postal: '10305', city: 'Berlin' },
+	 orders: [
+		{sum: 40, created: new Date("2018-01-04")},
+		{sum: 5, created: new Date("2018-01-07")},
+		{sum: 10, created: new Date("2018-01-10")}
+		]
+	}
+]);
+
+// task :get all customers who have postal 13305
+db.customers.find({"address.postal":"13305"});
+
+// task: get all customers who live in Schillerstr.
+db.customers.find({"address.street": /^A$/});
+
+// task: anton gets an additional address. everything stays the same except his street:
+// he has got a second apartment at haupstrasse 4.
+// 1. update his address to be an array instead of a single object. 
+// 2. add his second apartment at haupstraße 4 into that array. google for $push operator
+
+
+
+
