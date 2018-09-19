@@ -1,0 +1,125 @@
+$ mongo
+
+-- show databases
+
+print('hallo world');
+
+show dbs;
+
+use test;
+
+show collections
+
+db.createCollection("cars");
+
+db.cars.insert({
+	name: 'honda',
+	make: 'accord',
+	year: '2010'
+});
+
+-- with or without quotation marks, does not matter
+
+-- change stuff 
+
+db.cars.update({ name: 'honda' }, { $set: { name: 'ford' } });
+-- first we look for an entry with the key "name" which has
+-- the value 'honda' and then we submit the $set object which
+-- defines the key to change
+
+-- now we want to add another key in the found object, first we try
+-- with this:
+
+db.cars.update({
+ name: 'ford'
+ },
+ { $set: {
+ transmission: 'automatic'
+ }
+});
+
+
+-- then here the corrected version:
+
+db.cars.update({
+ name: 'porsche'
+ },
+ { $set: {
+ transmission: 'automatic'
+ }
+}, {upsert: true});
+
+
+-- we can also remove a certain entry
+
+db.cars.remove({name:'ford'});
+
+
+-- embedded javascript
+
+for(var i=0;i<10;i++) {
+ db.things.insert({x:i});
+}
+
+-- sorting etc.
+
+use example;
+db.createCollections(“students”);
+
+db.students.insert({
+	name: 'joe',
+	undergrad: true,
+	units: 9,
+	classes: ['geography', 'math', 'journalism']
+});
+
+db.students.insert({
+	name: 'jane',
+	undergrad: false,
+	units: 12,
+	classes: ['geography', 'science', 'journalism', 'history']
+});
+db.students.insert({
+	name: 'kevin',
+	undergrad: true,
+	units: 9,
+	classes: ['geography']
+});
+
+db.students.insert({
+	name: 'rachel',
+	undergrad: false,
+	units: 6,
+	classes: ['geography', 'history']
+});
+
+db.students.find().pretty();
+
+db.students.find({name:'rachel'});
+
+db.students.find({units: {$gt: 6}});
+db.students.find({units: {$lt: 7}});
+db.students.find({classes: {$in: ['history']}});
+
+db.students.find().sort({units: 1});
+db.students.find().sort({units: -1});
+db.students.find().sort({units: -1}).pretty();
+
+db.students.find().sort({name: 1});
+db.students.find().sort({name: -1});
+
+
+db.students.find().sort({name: -1}).limit(2);
+
+
+//Task: 1. Create a new database “medialib“ that is 
+supposed to save infos about videos and songs. 
+both are saved in the same collection 
+“mediaitem“. Find 5 proper keys (title and type is a 
+must, whereas type can either be „movie“ or
+„song“) and add 3 songs and 3 movies.
+
+
+//Task 2. Write a function/query list Titles that lists all titles and 
+types of each item in your collection. Therefore, take a 
+look at the collection.count() method. 
