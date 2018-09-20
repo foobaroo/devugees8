@@ -5,6 +5,12 @@ const app = express();
 const mongoose = require('mongoose');
 const Laties = require('./toolatemodel.js');
 
+// task:
+//
+// 1. protect routes: only let users read, write and delete laties
+//    when they are 'jan' and admin
+// 2. create a post method /logout, that destroys the session
+
 mongoose.connect('mongodb://localhost/toolate');
 
 app.use(express.json());
