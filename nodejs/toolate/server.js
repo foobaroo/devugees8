@@ -1,4 +1,5 @@
 const express = require('express');
+const session = require('express-session');
 const app = express();
 const mongoose = require('mongoose');
 const Laties = require('./toolatemodel.js');
@@ -39,7 +40,25 @@ app.post('/laties', function(req, res) {
     });
 });
 
-app.delete('/toolate', function(req, res) {
+app.delete('/laties/:id', function(req, res) {
+    Laties.findById(req.params.id, function(err, laty) {
+        if(!laty)
+            return res.send({ err: 'laty not found '});
+
+        laty.remove(function(err) {
+            if(err) return res.send(err);
+            return res.send(laty);
+        });
+    });
+});
+
+app.post('/login', function(req, res) {
+    if(!req.body.username || !req.body.password) 
+        return res.send({ error: 'username password required' });
+
+    if(req.body.username === 'jan' && req.body.password === 'foobar') {
+        
+    }    
 
 });
 
