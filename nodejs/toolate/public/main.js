@@ -41,7 +41,20 @@ function buildApp() {
     });
     
     $('#link-logout').on('click', () => {
-        // ajax request ... 
+        $.ajax({
+            url: '/logout',
+            method: 'POST',
+            contentType: 'application/json',
+            dataType: 'json',
+            success: function(data) {
+                console.log('success');
+                localStorage.setItem('loggedIn', 0);
+                buildLogin();
+            },
+            error: function(err) {
+                console.log('error ' + err);
+            }
+        });
     });
     
     let now = new Date();

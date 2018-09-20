@@ -12,7 +12,6 @@ const Laties = require('./toolatemodel.js');
 // 2. create a post method /logout, that destroys the session
 
 mongoose.connect('mongodb://localhost/toolate');
-
 app.use(express.json());
 app.use(cookieParser());
 app.use(session({
@@ -26,8 +25,17 @@ app.get('/', function(req, res) {
     return res.send({ toolate: '1.0' });
 });
 
-app.get('/laties', function(req, res) {
-    Laties.find({}, function(err, result) {
+function auth(req, res, next) {
+    if(req.session && req.session.user === 'jan' && req.session.admin === true) {
+        return next();
+    }
+    else {
+        return res.send(401);
+    }    
+}
+
+app.get('/laties', auth, function(req, res) {
+    Laties.find({},     function(err, result) {
         if(err) {
             return res.send({ error: err });
         }
@@ -40,7 +48,7 @@ app.get('/laties', function(req, res) {
     });
 });
 
-app.post('/laties', function(req, res) {
+app.post('/laties', auth, function(req, res) {
     if(!req.body.name || !req.body.time || !req.body.date) {
         return res.send({ error: 'name, time and date needed' });
     }
@@ -53,7 +61,7 @@ app.post('/laties', function(req, res) {
     });
 });
 
-app.delete('/laties/:id', function(req, res) {
+app.delete('/laties/:id', auth, function(req, res) {
     Laties.findById(req.params.id, function(err, laty) {
         if(!laty)
             return res.send({ err: 'laty not found '});
@@ -76,9 +84,13 @@ app.post('/login', function(req, res) {
 
         return res.send({ error: 0, result: 'login successfull' });
     }
-
 });
 
-
+app.post('/logout', function(req, res) {
+    if(req.session) {
+        req.session.destroy();
+        return res.send({ error: 0 });
+    }
+});
 
 app.listen(3000);
