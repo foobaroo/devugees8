@@ -204,5 +204,31 @@ function buildLogin() {
         </div>    
     `);
 
+    $('#form-login').submit((e) => {
+        e.preventDefault();
 
+        let userData = {
+            username: $('#username').val(),
+            password: $('#password').val()
+        };
+
+        $.ajax({
+            url: '/login',
+            method: 'POST',
+            contentType: 'application/json',
+            dataType: 'json',
+            data: JSON.stringify(userData),
+            success: function(data) {
+                console.log('success ' + data);
+
+                if(data.error == 0) {
+                    localStorage.setItem('loggedIn', 1);
+                    buildApp();
+                }
+            },
+            error: function(err) {
+                console.log('error ' + err);
+            }
+        });
+    });
 }

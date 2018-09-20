@@ -1,5 +1,6 @@
 const express = require('express');
 const session = require('express-session');
+const cookieParser = require('cookie-parser');
 const app = express();
 const mongoose = require('mongoose');
 const Laties = require('./toolatemodel.js');
@@ -7,8 +8,14 @@ const Laties = require('./toolatemodel.js');
 mongoose.connect('mongodb://localhost/toolate');
 
 app.use(express.json());
-app.use(express.static(__dirname + '/public'));
+app.use(cookieParser());
+app.use(session({
+    secret: 'mySecretKey',
+    resave: true,
+    saveUnitialized: true
+}));
 
+app.use(express.static(__dirname + '/public'));
 app.get('/', function(req, res) {
     return res.send({ toolate: '1.0' });
 });
@@ -57,9 +64,15 @@ app.post('/login', function(req, res) {
         return res.send({ error: 'username password required' });
 
     if(req.body.username === 'jan' && req.body.password === 'foobar') {
-        
-    }    
+        req.session.user = 'jan';
+        req.session.admin = true;
+        console.log(JSON.stringify(req.session));
+
+        return res.send({ error: 0, result: 'login successfull' });
+    }
 
 });
+
+
 
 app.listen(3000);
