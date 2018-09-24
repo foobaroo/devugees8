@@ -204,7 +204,7 @@ function buildLogin() {
                         <input style="max-width: 350px" class="form-control" id="username" placeholder="Enter Username">
                         </div>
                         <div class="form-group">
-                        <label for="username">Username</label>
+                        <label for="password">Password</label>
                         <input style="max-width: 350px" type="password"  class="form-control" id="password" placeholder="Password">                        
                         </div>               
                         <button type="submit" class="btn btn-primary">Login</button>         

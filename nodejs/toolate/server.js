@@ -9,7 +9,7 @@ const Users = require('./usermodel.js');
 // task:
 //
 // 1. protect routes: only let users read, write and delete laties
-//    when they are 'jan' and admin
+//    when they are  'jan' and admin
 // 2. create a post method /logout, that destroys the session
 
 mongoose.connect('mongodb://localhost/toolate');
@@ -79,7 +79,23 @@ app.post('/login', function(req, res) {
     if(!req.body.username || !req.body.password) 
         return res.send({ error: 'username password required' });
 
-    
+    // 1. find usr pwd combo on db
+    Users.findOneAndUpdate({ username: req.body.username, password: req.body.password}, {lastLogin: new Date()},
+    function(err, user) {
+        if(err) {
+            return res.send({ error: err });
+        }
+
+        if(!user) {
+            return res.send({ error: 'user not found' });
+        }
+
+        // 2. create a session
+        req.session.user = req.body.username;
+        req.session.admin = true;
+        
+        return res.send({ ...user, error: 0});
+    });
 });
 
 app.post('/logout', function(req, res) {
