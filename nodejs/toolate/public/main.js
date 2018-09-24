@@ -207,7 +207,7 @@ function buildLogin() {
                         <label for="password">Password</label>
                         <input style="max-width: 350px" type="password"  class="form-control" id="password" placeholder="Password">                        
                         </div>               
-                        <button type="submit" class="btn btn-primary">Login</button>         
+                        <button type="submit" class="btn btn-primary">Login</button>     
                     </form>
                 </div>
             </div>
@@ -219,7 +219,7 @@ function buildLogin() {
         e.preventDefault();
 
         let userData = {
-            username: $('#username').val(),
+            email: $('#username').val(),
             password: $('#password').val()
         };
 
@@ -232,9 +232,14 @@ function buildLogin() {
             success: function(data) {
                 console.log('success ' + data);
 
-                if(data.error == 0) {
+                if(data.error === 0) {
                     localStorage.setItem('loggedIn', 1);
                     buildApp();
+                }
+                else {
+                    alert('User not found');
+                    username: $('#username').val('');
+                    password: $('#password').val('') ;                   
                 }
             },
             error: function(err) {

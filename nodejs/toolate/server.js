@@ -28,7 +28,7 @@ app.get('/', function(req, res) {
 });
 
 function auth(req, res, next) {
-    if(req.session && req.session.user === 'jan' && req.session.admin === true) {
+    if(req.session && req.session.admin === true) {
         return next();
     }
     else {
@@ -76,11 +76,11 @@ app.delete('/laties/:id', auth, function(req, res) {
 });
 
 app.post('/login', function(req, res) {
-    if(!req.body.username || !req.body.password) 
+    if(!req.body.email || !req.body.password) 
         return res.send({ error: 'username password required' });
 
     // 1. find usr pwd combo on db
-    Users.findOneAndUpdate({ username: req.body.username, password: req.body.password}, {lastLogin: new Date()},
+    Users.findOneAndUpdate({ email: req.body.email, password: req.body.password}, {lastLogin: new Date()},
     function(err, user) {
         if(err) {
             return res.send({ error: err });
@@ -91,7 +91,7 @@ app.post('/login', function(req, res) {
         }
 
         // 2. create a session
-        req.session.user = req.body.username;
+        req.session.user = req.body.email;
         req.session.admin = true;
         
         return res.send({ ...user, error: 0});
