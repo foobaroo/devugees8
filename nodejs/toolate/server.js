@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser');
 const app = express();
 const mongoose = require('mongoose');
 const Laties = require('./toolatemodel.js');
+const Users = require('./usermodel.js');
 
 // task:
 //
@@ -21,6 +22,7 @@ app.use(session({
 }));
 
 app.use(express.static(__dirname + '/public'));
+
 app.get('/', function(req, res) {
     return res.send({ toolate: '1.0' });
 });
@@ -77,13 +79,7 @@ app.post('/login', function(req, res) {
     if(!req.body.username || !req.body.password) 
         return res.send({ error: 'username password required' });
 
-    if(req.body.username === 'jan' && req.body.password === 'foobar') {
-        req.session.user = 'jan';
-        req.session.admin = true;
-        console.log(JSON.stringify(req.session));
-
-        return res.send({ error: 0, result: 'login successfull' });
-    }
+    
 });
 
 app.post('/logout', function(req, res) {

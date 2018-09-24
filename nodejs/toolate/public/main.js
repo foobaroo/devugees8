@@ -1,6 +1,5 @@
 $(document).ready(function() {
     console.log('ready');
-
     let loggedIn = localStorage.getItem('loggedIn');
     if(loggedIn && loggedIn == 1) {
         buildApp();
@@ -9,7 +8,6 @@ $(document).ready(function() {
         buildLogin();
     }
 });
-
 
 function buildApp() {
     $('body').empty();
