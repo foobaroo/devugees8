@@ -7,6 +7,7 @@ const Laties = require('./toolatemodel');
 const Users = require('./usermodel');
 const mailnotifier = require('./mailnotifier');
 const randomstring = require('randomstring');
+const bcrypt = require('bcrypt');
 
 mongoose.connect('mongodb://localhost/toolate');
 app.use(express.json());
@@ -75,7 +76,7 @@ app.post('/login', function(req, res) {
         return res.send({ error: 'username password required' });
 
     // 1. find usr pwd combo on db
-    Users.findOneAndUpdate({ email: req.body.email, password: req.body.password, active: true }, {lastLogin: new Date()},
+    Users.findOne({ email: req.body.email, active: true },
     function(err, user) {
         if(err) {
             return res.send({ error: err });
@@ -85,10 +86,20 @@ app.post('/login', function(req, res) {
             return res.send({ error: 'user not found' });
         }
 
-        // 2. create a session
-        req.session.user = req.body.email;
-        req.session.admin = true;        
-        return res.send({ ...user, error: 0});
+        bcrypt.compare(req.body.password, user.password, function(err, hashResult) {
+
+            if(hashResult) {
+                req.session.user = req.body.email;
+                req.session.admin = true;        
+
+                user.lastLogin = new Date();
+                user.save();
+                return res.send({ ...user, error: 0});
+            }
+            else {
+                return res.send({ error: 'password incorrect' });
+            }
+        });
     });
 });
 
@@ -108,26 +119,29 @@ app.post('/signup', function(req, res) {
             return res.send({ error: 'user already exists' })
         }
 
-        let activationCode = randomstring.generate(20);
-        let newUser = new Users({
-            email: req.body.email,
-            password: req.body.password,
-            activationCode: activationCode,
-            active: false,
-            lastLogin: null
+        bcrypt.hash(req.body.password, 10, function(err, hashedPassword) {
+
+            let activationCode = randomstring.generate(20);
+            let newUser = new Users({
+                email: req.body.email,
+                password: hashedPassword,
+                activationCode: activationCode,
+                active: false,
+                lastLogin: null
+            });
+        
+            newUser.save(function(err, newRecord) {
+                if(err) return res.send({ error: err });
+        
+                mailnotifier.sendMail(req.body.email, 'Your Registration at Too Late App', `
+                    Hi, 
+                    please activate your account at TooLate App by clicking 
+                    the following link: <a href="http://localhost:3000/?activate=${activationCode}">Click Here</a>
+                `);
+        
+                return res.send({ ...newRecord, error: 0 });
+            });    
         });
-    
-        newUser.save(function(err, newRecord) {
-            if(err) return res.send({ error: err });
-    
-            mailnotifier.sendMail(req.body.email, 'Your Registration at Too Late App', `
-                Hi, 
-                please activate your account at TooLate App by clicking 
-                the following link: <a href="http://localhost:3000/?activate=${activationCode}">Click Here</a>
-            `);
-    
-            return res.send({ ...newRecord, error: 0 });
-        });    
     });        
 });
 
