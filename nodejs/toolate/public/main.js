@@ -1,11 +1,37 @@
 $(document).ready(function() {
     console.log('ready');
+    
+    let urlParts = window.location.href.split('?');
+    if(urlParts.length > 1) {
+        let lastPart = urlParts[1];
+        if(lastPart.split('=')[0] === 'activate') {
+            let activationCode = lastPart.split('=')[1];
+            $.ajax({
+                url: '/activate/' + activationCode,
+                method: 'GET',
+                contentType: 'application/json',
+                dataType: 'json',
+                success: function(data) {
+                    if(data.error == 0) {
+                        alert('Your account has been activated');
+                    }
+                    else {
+                        alert('Invalid activation code');
+                    }
+                },
+                error: function(error) {
+                    console.log('error ' + error);
+                }
+            })
+        }
+    }
+    
     let loggedIn = localStorage.getItem('loggedIn');
     if(loggedIn && loggedIn == 1) {
         buildApp();
     }
     else {
-        buildLogin();
+        buildAuth();
     }
 });
 
@@ -47,7 +73,7 @@ function buildApp() {
             success: function(data) {
                 console.log('success');
                 localStorage.setItem('loggedIn', 0);
-                buildLogin();
+                buildAuth();
             },
             error: function(err) {
                 console.log('error ' + err);
@@ -190,28 +216,47 @@ function loadHistory() {
     });
 }
 
-function buildLogin() {
+function buildAuth() {
     $('body').empty();
     $('body').append(`
         <div id="content" class="container">
+        <h2 style="margin-top: 20px;"><b>Laty App</b></h2>
         <div class="row">
-        <div class="col-lg-12">
-        <div style="margin-top: 100px">
-        <h2><b>Laty App</b></h2>
-                    <form id="form-login">
-                        <div class="form-group">
-                        <label for="username">Username</label>
-                        <input style="max-width: 350px" class="form-control" id="username" placeholder="Enter Username">
-                        </div>
-                        <div class="form-group">
-                        <label for="password">Password</label>
-                        <input style="max-width: 350px" type="password"  class="form-control" id="password" placeholder="Password">                        
-                        </div>               
-                        <button type="submit" class="btn btn-primary">Login</button>     
-                    </form>
-                </div>
+        <div class="col-md-6">
+        <div style="margin-top: 50px">
+                        <form id="form-login">
+                            <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input style="max-width: 350px" class="form-control" id="email" placeholder="Enter Email">
+                            </div>
+                            <div class="form-group">
+                            <label for="password">Password</label>
+                            <input style="max-width: 350px" type="password"  class="form-control" id="password" placeholder="Password">                        
+                            </div>               
+                            <button type="submit" class="btn btn-primary">Login</button>     
+                        </form>
+                    </div>
             </div>
-            </div>            
+            <div class="col-md-6">
+                    <div style="margin-top: 50px">
+                            <form id="form-signup">
+                            <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input style="max-width: 350px" class="form-control" id="signup-email" placeholder="Enter Email">
+                            </div>
+                            <div class="form-group">
+                            <label for="password">Password</label>
+                            <input style="max-width: 350px" type="password"  class="form-control" id="signup-password" placeholder="Password">                        
+                            </div>
+                            <div class="form-group">
+                            <label for="repeat-password">Repeat Password</label>
+                            <input style="max-width: 350px" type="password"  class="form-control" id="signup-repeat-password" placeholder="Repeat Password">                        
+                            </div>                            
+                            <button type="submit" class="btn btn-primary">Sign Up</button>     
+                        </form>
+                    </div>
+            </div>        
+        </div>            
         </div>    
     `);
 
@@ -219,7 +264,7 @@ function buildLogin() {
         e.preventDefault();
 
         let userData = {
-            email: $('#username').val(),
+            email: $('#email').val(),
             password: $('#password').val()
         };
 
@@ -237,9 +282,9 @@ function buildLogin() {
                     buildApp();
                 }
                 else {
-                    alert('User not found');
-                    username: $('#username').val('');
-                    password: $('#password').val('') ;                   
+                    alert('Email not found');
+                    $('#email').val('');
+                    $('#password').val('') ;                   
                 }
             },
             error: function(err) {
@@ -247,4 +292,39 @@ function buildLogin() {
             }
         });
     });
+
+    $('#form-signup').submit((e) => {
+        e.preventDefault();
+
+        let userData = {
+            email: $('#signup-email').val(),
+            password: $('#signup-password').val(),
+            repeatPassword: $('#signup-repeat-password').val()
+        };
+
+        $.ajax({
+            url: '/signup',
+            method: 'POST',
+            contentType: 'application/json',
+            dataType: 'json',
+            data: JSON.stringify(userData),
+            success: function(data) {
+                console.log('success ' + data);
+
+                if(data.error == 0) {
+                    alert(`An registration mail has been sent to ${userData.email}, please verify your account!`);
+
+                    $('#signup-email').val('');
+                    $('#signup-password').val('')
+                    $('#signup-repeat-password').val('');
+                }
+                else {
+                    alert('Error during registratin process');
+                }
+            },
+            error: function(err) {
+                console.log('error ' + err);
+            }
+        });
+    });    
 }

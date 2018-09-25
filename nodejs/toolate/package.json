@@ -13,6 +13,8 @@
     "cookie-parser": "^1.4.3",
     "express": "^4.16.3",
     "express-session": "^1.15.6",
-    "mongoose": "^5.2.15"
+    "mongoose": "^5.2.15",
+    "nodemailer": "^4.6.8",
+    "randomstring": "^1.1.5"
   }
 }

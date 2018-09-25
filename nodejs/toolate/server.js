@@ -3,8 +3,10 @@ const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const app = express();
 const mongoose = require('mongoose');
-const Laties = require('./toolatemodel.js');
-const Users = require('./usermodel.js');
+const Laties = require('./toolatemodel');
+const Users = require('./usermodel');
+const mailnotifier = require('./mailnotifier');
+const randomstring = require('randomstring');
 
 mongoose.connect('mongodb://localhost/toolate');
 app.use(express.json());
@@ -73,7 +75,7 @@ app.post('/login', function(req, res) {
         return res.send({ error: 'username password required' });
 
     // 1. find usr pwd combo on db
-    Users.findOneAndUpdate({ email: req.body.email, password: req.body.password}, {lastLogin: new Date()},
+    Users.findOneAndUpdate({ email: req.body.email, password: req.body.password, active: true }, {lastLogin: new Date()},
     function(err, user) {
         if(err) {
             return res.send({ error: err });
@@ -87,6 +89,64 @@ app.post('/login', function(req, res) {
         req.session.user = req.body.email;
         req.session.admin = true;        
         return res.send({ ...user, error: 0});
+    });
+});
+
+app.post('/signup', function(req, res) {
+    if(!req.body.email || !req.body.password || !req.body.repeatPassword) 
+        return res.send({ error: 'username, password and repeatPassword required' });
+
+    if(req.body.password !== req.body.repeatPassword) 
+        return res.send({ error: 'password must be equal to repeatPassword' });
+
+    Users.findOne({ email: req.body.email}, function(err, userFound) {
+        if(err) {
+            return res.send({ error: err });
+        }
+
+        if(userFound) {
+            return res.send({ error: 'user already exists' })
+        }
+
+        let activationCode = randomstring.generate(20);
+        let newUser = new Users({
+            email: req.body.email,
+            password: req.body.password,
+            activationCode: activationCode,
+            active: false,
+            lastLogin: null
+        });
+    
+        newUser.save(function(err, newRecord) {
+            if(err) return res.send({ error: err });
+    
+            mailnotifier.sendMail(req.body.email, 'Your Registration at Too Late App', `
+                Hi, 
+                please activate your account at TooLate App by clicking 
+                the following link: <a href="http://localhost:3000/?activate=${activationCode}">Click Here</a>
+            `);
+    
+            return res.send({ ...newRecord, error: 0 });
+        });    
+    });        
+});
+
+app.get('/activate/:activationCode', function(req, res) {
+    Users.findOneAndUpdate({ activationCode: req.params.activationCode }, { active: true },
+    function(err, user) {
+        if(err) {
+            return res.send({ error: err });
+        }
+
+        if(!user) {
+            return res.send({ error: 'user not found' });
+        }
+    
+        // direct login: 
+        // req.session.admin = true
+        // on frontend perform redirect
+
+        return res.send({ error: 0 });
     });
 });
 
