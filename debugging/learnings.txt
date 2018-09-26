@@ -1,6 +1,8 @@
 It is frustrating, to not find the bug that prevents my app from executing properly
 -----------------------------------------------------------------------------------
 
+task: Break this down to 5 most important points and then present them in front of the class.
+
 - switch off the laptop and wait for my subconsciousness to give
   me the solution when I am asleep
 - read the code again (... and again)
