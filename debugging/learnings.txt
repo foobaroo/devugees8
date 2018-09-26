@@ -1,0 +1,54 @@
+It is frustrating, to not find the bug that prevents my app from executing properly
+-----------------------------------------------------------------------------------
+
+- switch off the laptop and wait for my subconsciousness to give
+  me the solution when I am asleep
+- read the code again (... and again)
+	-> go step by step what you have accomplished so far
+- look for help -> show my code to someone or something
+- console.log out variables for the logging purpose
+- using the debugger
+	- find a line in your code, where you want to stop the 
+	  execution (maybe even earlier in the code)
+	- usually, you want to see the value of a certain variable
+	- set the breakpoint
+	- run the program (frontend or backend)
+	- wait for the debugger to stop your program
+	- look at the variables in the callstack -> find your variable and analyze it
+- if you copy/paste code, try to understand first
+- google 
+	-> stackoverflow
+	-> mozilla devolper tutorials
+	-> blogs
+	-> forums
+	-> codepen
+- questioning myself, if am doing it ENTIRELY WRONG. take an online course for the topic
+	-> udemy
+	-> pluralsight
+	-> codeacademy
+	-> greenhouse
+	-> codeschool
+	-> vesbos
+- trial and error
+	-> try the same idea with different way of coding
+- take a white sheet of paper and draw my thoughts
+	-> flowchart
+- start from scratch again
+- read the boring/frustrating/weired error messages
+	-> what does my computer try to tell me?
+	-> what does my IDE try to tell me?
+
+	1. console on the backend
+	2. console on the browser
+	3. console of your IDE
+	4. network monitor
+	5. cookie inspector
+	6. HTML sources -> does my page look correct
+- kill the server/browser, restart the OS
+- collapse/expand
+- make sure you are 
+	- in the right workspace/folder
+	- on the right database
+	- you have opened the right URL
+	- you have set the correct paths for your resources
+- drink a coffee, relax, meditate, watch netflix, playstation 4, computer game, swimming
