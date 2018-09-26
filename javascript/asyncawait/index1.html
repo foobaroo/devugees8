@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Callbacks/Promises/AsyncAwait</title>
+    <script src="jquery.js"></script>
+    <script src="main1.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Asynchronous Methods without passing data between the functions</h1>
+        <div>
+            <button onclick="addNumber()">Add Number</button>
+            <button onclick="addSomeNumbersDelayedCallback()">Add Numbers Callbacks</button>
+            <button onclick="addSomeNumbersDelayedPromise()">Add Numbers Promises</button>
+            <button onclick="addSomeNumbersDelayedAsyncAwait()">Add Numbers AsyncAwait</button>
+            <button onclick="clearNumbers()">Clear Numbers</button>
+        </div>
+        <div id="numbers">
+            
+        </div>
+        <div>
+            <h1 id="error"></h1>
+        </div>
+    </div>
+</body>
+</html>
