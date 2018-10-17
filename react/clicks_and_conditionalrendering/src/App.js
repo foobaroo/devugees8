@@ -27,6 +27,7 @@ class App extends Component {
     this.setState({
       page: page
     });
+    // alert(this.state.page); -- will contain old value until next render()
   }
 
   render() {
