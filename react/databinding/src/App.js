@@ -51,7 +51,7 @@ class App extends Component {
         <div>
           you entered: {this.state.sometext}
         </div>
-        <h1>Databinding 2</h1>    
+        <h1>Databinding 2</h1>
         <div>
           username: <input name="username" onChange={this.onChange} type="text"/>
         </div>
