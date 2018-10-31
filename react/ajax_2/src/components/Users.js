@@ -28,13 +28,14 @@ export default class Users extends Component {
       });
   }
 
-
   render() {
     return (
       <div>
         <table>
             <thead>
+            <tr>
                 <td>ID</td><td>Name</td><td>Email</td>
+            </tr>
             </thead>
             <tbody>
         { this.state.users && this.state.users.map( (u) => {
