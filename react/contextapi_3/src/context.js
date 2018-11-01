@@ -8,7 +8,7 @@ const reducer = (state, action) => {
                 ...state,
                 x: state.x + 1
             }
-
+            
         case 'DECREMENT_Y':
             return {
                 ...state,
