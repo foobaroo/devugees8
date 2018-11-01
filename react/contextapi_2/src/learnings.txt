@@ -1,0 +1,13 @@
+1. A contextapi is a component that has a state and
+   some members functions. The state and functions are
+   shared with other components of the app.
+
+2. In order to enable 1., 
+
+   Condition A: the all of the App's components
+   including App need to be in the scope of the context API.
+   (enclosing the App)
+
+   Condition B: the component that wants to have access
+   to the context API needs to become a consumer. This is done
+   by enclosing itself with the consumer tag
