@@ -10,13 +10,12 @@ export default function(state = initialState, action) {
                 ...state,
                 x: state.x + 1
             }
-
-        case 'DECREMENT_Y':
+        case 'INCREMENT_Y':
             return {
                 ...state,
-                y: state.y - 1
+                y: state.y + 1
             }
         default:
             return state;
-    }    
+    }
 }

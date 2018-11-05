@@ -5,24 +5,19 @@ class B extends Component {
   render() {
     return (
       <div>
-        B
-        x = {this.props.x},
-        y = {this.props.y}
-
-        <button onClick={this.props.incrementA}>Increment A</button>
+        B, x = {this.props.x}
+        <button onClick={this.props.incrementY}>Increment Y</button>
       </div>
     )
   }
 }
 
 const mapStateToProps = (state) => ({
-    x: state.reducer1.x,
-    y: state.reducer1.y
+    x: state.x
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    incrementA: () => dispatch({ type: 'INCREMENT_A' }),
-    incrementB: () => dispatch({ type: 'INCREMENT_B' })
-})
+    incrementY: () => dispatch({ type: 'INCREMENT_Y' })
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(B);

@@ -5,16 +5,20 @@ class C extends Component {
   render() {
     return (
       <div>
-        C
-        a = {this.props.a}, b = {this.props.b}
+        C, y = {this.props.y}
+        <button onClick={this.props.incrementX}>Increment X</button>        
       </div>
     )
   }
 }
 
 const mapStateToProps = (state) => ({
-    a: state.reducer2.a,
-    b: state.reducer2.b
+  y: state.y
 });
 
-export default connect(mapStateToProps, null)(C);
+const mapDispatchToProps = (dispatch) => ({
+  incrementX: () => dispatch({ type: 'INCREMENT_X' })
+});
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(C);
