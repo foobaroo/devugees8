@@ -8,7 +8,7 @@ class App extends Component {
         
     return (
       <div className="App">
-        <h1>Redux 1</h1>
+        <h1>Redux 2</h1>
         <B />
         <C />
       </div>

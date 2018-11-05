@@ -5,7 +5,7 @@ class C extends Component {
   render() {
     return (
       <div>
-        C, y = {this.props.y}
+        C, a = {this.props.a}, b = {this.props.b}
         <button onClick={this.props.incrementX}>Increment X</button>        
       </div>
     )
@@ -13,7 +13,8 @@ class C extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  y: state.y
+  a: state.reducer2.a,
+  b: state.reducer2.b
 });
 
 const mapDispatchToProps = (dispatch) => ({
