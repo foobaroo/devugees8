@@ -1,25 +1,41 @@
 import React, { Component } from 'react';
 import './App.css';
-import Contact from './components/Contact';
-import Header from './components/Header';
+import Contact from './components/contacts/Contact';
+import Header from './components/layouts/Header';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Contacts from './components/contacts/Contacts';
+
+import { Provider } from './context';
+
+import AddContact from './components/contacts/AddContact';
+
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
+import About from './components/pages/About';
+import NotFound from './components/pages/NotFound';
+import EditContact from './components/contacts/EditContact';
 
 //JSX
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <Header branding="Contact Number" />
-        <div className="container">
-          <Contact name="John Doe" email="jdoe@gmail.com" phone="55-555-5555" />
-          <Contact
-            name="Karen Smith"
-            email="karen@gmail.com"
-            phone="22-222-2222"
-          />
-        </div>
-      </div>
+      <Provider>
+        <Router>
+          <div className="App">
+            <Header branding="Contact Number" />
+            <div className="container">
+              <Switch>
+                <Route exact path="/" component={Contacts} />
+                <Route exact path="/contact/add" component={AddContact} />
+                <Route exact path="/about" component={About} />
+                <Route exact path="/contact/edit/:id" component={EditContact} />
+                <Route component={NotFound} />
+              </Switch>
+            </div>
+          </div>
+        </Router>
+      </Provider>
     );
   }
 }
