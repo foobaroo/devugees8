@@ -20,7 +20,7 @@ class App extends Component {
 
   saveData = async () => {
     const result = await axios.post('http://localhost:8000/somedata',
-    {data: 'halloworld'});
+    { data: 'halloworld' });
 
     this.setState({
       somedata: result.data
