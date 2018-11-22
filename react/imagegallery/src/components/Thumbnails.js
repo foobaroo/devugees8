@@ -19,8 +19,8 @@ export default class Thumbnails extends Component {
     return (
       <div className="thumbnails">
         { this.state.images && 
-           this.state.images.map( (img) => (
-                <Thumbnail url={'images/' + img.url} />
+           this.state.images.map((img) => (
+                <Thumbnail id={img.id} url={'../images/' + img.url} />
            ))
         }
       </div>

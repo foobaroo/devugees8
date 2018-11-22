@@ -7,22 +7,11 @@ import {
   CarouselCaption
 } from 'reactstrap';
 
-const items = [
-  {
-    src: 'images/sharks-1.jpg'
-  },
-  {
-    src: 'images/maxresdefault.jpg'
-  },
-  {
-    src: 'images/dolphin-stock-gty-jef-180827_hpMain_16x9_1600.jpg'
-  }
-];
 
 class Gallery extends Component {
   constructor(props) {
     super(props);
-    this.state = { activeIndex: 0 };
+    this.state = { activeIndex: parseInt(this.props.activeIndex) };
     this.next = this.next.bind(this);
     this.previous = this.previous.bind(this);
     this.goToIndex = this.goToIndex.bind(this);
@@ -77,7 +66,7 @@ class Gallery extends Component {
         next={this.next}
         previous={this.previous}
       >
-        <CarouselIndicators items={items} activeIndex={activeIndex} onClickHandler={this.goToIndex} />
+        <CarouselIndicators items={this.props.items} activeIndex={activeIndex} onClickHandler={this.goToIndex} />
         {slides}
         <CarouselControl direction="prev" directionText="Previous" onClickHandler={this.previous} />
         <CarouselControl direction="next" directionText="Next" onClickHandler={this.next} />

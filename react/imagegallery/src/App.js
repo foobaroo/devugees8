@@ -10,8 +10,8 @@ class App extends Component {
   
   state = {
     
-  }
-
+  } 
+    
   render() {
     return (
       <Router>
@@ -19,7 +19,7 @@ class App extends Component {
         <MyNavbar />
         <Switch>
           <Route exact path="/" component={Thumbnails} />
-          <Route exact path="/gallery" component={GalleryContainer} />
+          <Route exact path="/gallery/:id" component={GalleryContainer} />
           <Route component={NotFound} />
         </Switch>
         </div>

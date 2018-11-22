@@ -1,8 +1,9 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 const Thumbnail = (props) => {
   return (
-    <div className="thumbnail"><img src={props.url} /></div>
+    <Link to={'/gallery/' + props.id}><div className="thumbnail"><img src={props.url} /></div></Link>
   )
 }
 
