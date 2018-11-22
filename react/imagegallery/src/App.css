@@ -1,0 +1,14 @@
+.thumbnails {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    padding: 15px;
+}
+
+.thumbnail {
+    margin: 4px;
+}
+
+.thumbnail img {
+    width: 360px;
+}
