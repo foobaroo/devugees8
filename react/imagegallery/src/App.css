@@ -12,3 +12,7 @@
 .thumbnail img {
     width: 360px;
 }
+
+.carousel-item > img {
+    width: 300px;
+}
