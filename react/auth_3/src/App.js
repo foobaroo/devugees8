@@ -21,26 +21,39 @@ class App extends Component {
 
     if(result.data.error == 0) {
       alert('login successfull');
+
+      localStorage.setItem('token', result.data.token);
     }
   }
 
   logout = async() => {
-    const result = await axios('http://localhost:8000/logout', {
-      method: 'post',
-      withCredentials: true
-    });
+    try {
+      const token = localStorage.getItem('token');
+      const result = await axios('http://localhost:8000/logout', {
+        method: 'post',
+        headers: {
+          'Authorization' : 'Bearer ' + token
+        }
+      });
 
-    if(result.data.error == 0) {
-      alert(result.data.message);
-    }    
+      if(result.data.error == 0) {
+        alert(result.data.message);
+      }
+    }
+    catch(e) {
+      alert(e);
+    }
   }
 
   getSecretData = async() => {
     try {
+      const token = localStorage.getItem('token');      
       const result = await axios('http://localhost:8000/content',
         { 
           method: 'get',
-          withCredentials: true
+          headers: {
+            'Authorization' : 'Bearer ' + token
+          }
         });
       
       if(result.data.error == 0) {
@@ -57,7 +70,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1>Auth 2: Sessions</h1>
+        <h1>Auth 3: JWT</h1>
         <div>
           Username: <input type="text" name="username" onChange={this.onChangeHandler} />
           Password: <input type="password" name="password" onChange={this.onChangeHandler} />
