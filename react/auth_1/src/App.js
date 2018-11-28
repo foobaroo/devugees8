@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import axios from 'axios';
 
 class App extends Component {
   
@@ -9,7 +10,18 @@ class App extends Component {
   }
 
   login = async() => {
+    const result = await axios('http://localhost:8000/login', {
+      method: 'post',
+      data: {
+        username: this.state.username,
+        password: this.state.password
+      },
+      withCredentials: true
+    });
 
+    if(result.data.error == 0) {
+      alert('login successfull');
+    }
   }
 
   logout = async() => {
