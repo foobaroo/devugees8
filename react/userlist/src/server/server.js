@@ -1,107 +1,106 @@
 var mongoose = require('mongoose');
-var Student = require('./studentmodel');
+var User = require('./usermodel');
 var express = require('express');
 var bodyParser = require('body-parser');
 
 const app = express();
 app.use(bodyParser());
 
-mongoose.connect('mongodb://localhost/test');
+mongoose.connect('mongodb://localhost/userlist');
 app.get('/', function(req, res) {
 	res.json({
-		info: 'student crud api'
+		info: 'user crud api'
 	})
 });
 
 // task:
-// Create a CRUD api for creating, updating, deleting and reading student info.
+// Create a CRUD api for creating, updating, deleting and reading user info.
 // POST - create
 // PUT - update
 // DELETE - delete
 // GET - read
 //
-// PUT, DELETE and GET expect a student ID
+// PUT, DELETE and GET expect a user ID
 
-// add a new student
-app.post('/student', function(req, res) {
-	// here we take req.body for the new student
+// add a new user
+app.post('/user', function(req, res) {
+	// here we take req.body for the new user
 	console.log(req.body);
-	var newStudent = new Student(req.body);
-	newStudent.save(function(err) {
+	var newUser = new User(req.body);
+	newUser.save(function(err) {
 		if(err) {
 			return res.send(err);
 		}
 		
-		console.log('user chris has been saved successfully');
-		return res.send({ newStudent: req.body })
+		return res.send({ newUser: req.body });
 	});
 });
 
-// load student info via id 
-app.get('/student/:id', function(req, res) {
+// load user info via id 
+app.get('/user/:id', function(req, res) {
 	// read statement
-	Student.findById(req.params.id, function(err, student) {
+	User.findById(req.params.id, function(err, user) {
 		
-		if(!student)
-			return res.send({err: 'student not found'});	
+		if(!user)
+			return res.send({err: 'user not found'});	
 
-		console.log(student);
-		return res.send(student);
+		console.log(user);
+		return res.send(user);
 	});
 });
 
-// load student info via id 
-app.get('/studentbyname/:name', function(req, res) {
+// load user info via id 
+app.get('/userbyname/:name', function(req, res) {
 	// read statement
-	Student.findOne({name:req.params.name}, function(err, student) {
+	User.findOne({name:req.params.name}, function(err, user) {
 		
-		if(!student)
-			return res.send({err: 'student not found'});	
+		if(!user)
+			return res.send({err: 'user not found'});	
 
-		console.log(student);
-		return res.send(student);
+		console.log(user);
+		return res.send(user);
 	});
 });
 
 // update statement
-app.put('/student/:id', function(req, res) {
-	Student.findById(req.params.id, function(err, student) {
-		if(!student)
-			return res.send({err: 'student not found'});
+app.put('/user/:id', function(req, res) {
+	User.findById(req.params.id, function(err, user) {
+		if(!user)
+			return res.send({err: 'user not found'});
 
-		// check all params that are set in req.body and attach/overwrite the student object
+		// check all params that are set in req.body and attach/overwrite the user object
 		for(attr in req.body) {
-			student[attr] = req.body[attr];
+			user[attr] = req.body[attr];
 		}
 
-		student.save(function(err) {
+		user.save(function(err) {
 			if(err) {
 				return res.send(err);
 			}
 
-			console.log('student updated');
-			return res.send(student);
+			console.log('user updated');
+			return res.send(user);
 		});
 	});
 });
 
-// delete a student
-app.delete('/student/:id', function(req, res) {
-	Student.findById(req.params.id, function(err, student) {
-		if(!student)
-			return res.send({err: 'student not found'});
+// delete a user
+app.delete('/user/:id', function(req, res) {
+	User.findById(req.params.id, function(err, user) {
+		if(!user)
+			return res.send({err: 'user not found'});
 
-		student.remove(function(err) {
+		user.remove(function(err) {
 			if(err) {
 				return res.send(err);
 			}
 
-			console.log('student deleted');
-			return res.send(student);
+			console.log('user deleted');
+			return res.send(user);
 		});
 	});
 });
 
-app.listen(3002, function() {
-	console.log('app listening on port 3000');
+app.listen(8000, function() {
+	console.log('app listening on port 8000');
 });
