@@ -2,9 +2,17 @@ var mongoose = require('mongoose');
 var User = require('./usermodel');
 var express = require('express');
 var bodyParser = require('body-parser');
+var cors = require('cors');
+
+const corsOptions = {
+    origin: 'http://localhost:3000',
+    optionsSuccessStatus: 200,
+    credentials: true
+};
 
 const app = express();
 app.use(bodyParser());
+app.use(cors(corsOptions));
 
 mongoose.connect('mongodb://localhost/userlist');
 app.get('/', function(req, res) {
@@ -33,6 +41,18 @@ app.post('/user', function(req, res) {
 		}
 		
 		return res.send({ newUser: req.body });
+	});
+});
+
+// load user info via id 
+app.get('/users', function(req, res) {
+	// read statement
+	User.find({}, function(err, users) {
+		if(!users)
+			return res.send({err: 'users not found'});	
+
+		console.log(users);
+		return res.send(users);
 	});
 });
 

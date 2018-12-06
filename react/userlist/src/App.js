@@ -1,20 +1,19 @@
 import React, { Component } from 'react';
-import './App.css';
-
-import { Button } from 'reactstrap';
+import { Container, Row, Col } from 'reactstrap';
+import Users from './components/Users';
 
 class App extends Component {
-  
-  sayHalloWorld = () => {
-    alert('Hallo World');
-  }
   
   render() {
     return (
       <div className="App">
-        <h1>The App Component</h1>
-
-        <Button onClick={this.sayHalloWorld}>Hallo World</Button>
+        <Container>
+          <Row>
+            <Col>
+              <Users />
+            </Col>
+          </Row>
+        </Container>
       </div>
     );
   }
